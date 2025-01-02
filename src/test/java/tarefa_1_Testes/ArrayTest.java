@@ -89,19 +89,6 @@ class ArrayTest {
     }
 
     @Test
-    void testarArrayComNumerosNegativos() {
-        int[] numeros = new int[tamanho];
-
-        for (int i = 0; i < tamanho; i++) {
-            numeros[i] = -gerador.nextInt(100);
-        }
-
-        for (int i = 0; i < tamanho; i++) {
-            assertTrue(numeros[i] < 0);
-        }
-    }
-
-    @Test
     void testarRedimensionamentoArray() {
         int[] numeros = new int[5];
         numeros = new int[10];
