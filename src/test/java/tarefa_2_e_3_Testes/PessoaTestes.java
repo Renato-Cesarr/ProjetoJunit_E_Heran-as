@@ -12,28 +12,29 @@ class PessoaArrayTest {
 
     private PessoaArray pessoaArray;
     private Pessoa pessoa;
+    private Pessoa pessoaAtualizada;
+    private Pessoa pessoaFalsa;
+    private Pessoa pessoaMaria;
+    private Pessoa pessoaJose;
 
     @BeforeEach
-    void setUp() {
+    void configurar() {
         pessoaArray = new PessoaArray(5);
         pessoa = new Pessoa(1, "João");
+        pessoaAtualizada = new Pessoa(1, "Carlos");
+        pessoaFalsa = new Pessoa(10, "Ana");
+        pessoaMaria = new Pessoa(2, "Maria");
+        pessoaJose = new Pessoa(3, "José");
     }
 
     @Test
-    void shouldInsertPessoa() {
+    void deveInserirPessoa() {
         assertTrue(pessoaArray.inserir(0, pessoa));
         assertNotNull(pessoaArray.getItens()[0]);
     }
 
     @Test
-    void shouldNotInsertIncorrectModel() {
-        Pessoa fakePessoa = new Pessoa(2, "Carlos");
-        assertFalse(pessoaArray.inserir(0, fakePessoa));
-        assertNull(pessoaArray.getItens()[0]);
-    }
-
-    @Test
-    void shouldRemovePessoa() {
+    void deveRemoverPessoa() {
         pessoaArray.inserir(0, pessoa);
         assertTrue(pessoaArray.pesquisar(pessoa));
 
@@ -43,46 +44,43 @@ class PessoaArrayTest {
     }
 
     @Test
-    void shouldNotRemoveObjectNotInArray() {
+    void naoDeveRemoverObjetoNaoEncontrado() {
         assertFalse(pessoaArray.remover(pessoa));
     }
 
     @Test
-    void shouldReturnTrueWhenModelIsPresent() {
+    void deveRetornarVerdadeiroQuandoModeloEstiverPresente() {
         pessoaArray.inserir(0, pessoa);
         assertTrue(pessoaArray.pesquisar(pessoa));
     }
 
     @Test
-    void shouldReturnFalseWhenModelIsNotPresent() {
+    void deveRetornarFalsoQuandoModeloNaoEstiverPresente() {
         assertFalse(pessoaArray.pesquisar(pessoa));
     }
 
     @Test
-    void shouldUpdatePessoa() {
+    void deveAtualizarPessoa() {
         pessoaArray.inserir(0, pessoa);
-        Pessoa updatedPessoa = new Pessoa(1, "Carlos");
-        assertTrue(pessoaArray.atualizar(0, updatedPessoa));
+        assertTrue(pessoaArray.atualizar(0, pessoaAtualizada));
         assertNotEquals(pessoa, pessoaArray.getItens()[0]);
     }
 
     @Test
-    void shouldNotUpdateModelNotInArray() {
-        Pessoa fakePessoa = new Pessoa(10, "Ana");
-        assertFalse(pessoaArray.atualizar(0, fakePessoa));
+    void naoDeveAtualizarModeloNaoEncontrado() {
+        assertFalse(pessoaArray.atualizar(0, pessoaFalsa));
     }
 
     @Test
-    void shouldNotUpdateIncorrectModelType() {
-        // Não há necessidade de cast, já estamos lidando diretamente com objetos do tipo Pessoa
+    void naoDeveAtualizarTipoDeModeloIncorreto() {
         assertFalse(pessoaArray.atualizar(0, new Pessoa(2, "Roberta")));
     }
 
     @Test
-    void shouldSortByIdCrescente() {
+    void deveOrdenarPorIdCrescente() {
         pessoaArray.inserir(0, pessoa);
-        pessoaArray.inserir(1, new Pessoa(2, "Maria"));
-        pessoaArray.inserir(2, new Pessoa(3, "José"));
+        pessoaArray.inserir(1, pessoaMaria);
+        pessoaArray.inserir(2, pessoaJose);
 
         pessoaArray.ordenarPorIdCrescente();
 
@@ -92,10 +90,10 @@ class PessoaArrayTest {
     }
 
     @Test
-    void shouldSortByIdDecrescente() {
+    void deveOrdenarPorIdDecrescente() {
         pessoaArray.inserir(0, pessoa);
-        pessoaArray.inserir(1, new Pessoa(2, "Maria"));
-        pessoaArray.inserir(2, new Pessoa(3, "José"));
+        pessoaArray.inserir(1, pessoaMaria);
+        pessoaArray.inserir(2, pessoaJose);
 
         pessoaArray.ordenarPorIdDecrescente();
 

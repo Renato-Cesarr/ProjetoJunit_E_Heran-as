@@ -11,69 +11,76 @@ import tarefa2.model.Bicicleta;
 class BicicletaArrayTest {
 
 	private BicicletaArray bicicletaArray;
-	private Bicicleta bicicleta;
+	private Bicicleta bicicletaAtualizada;
+	private Bicicleta bicicletaFalsa;
+	private Bicicleta bicicletaVerde;
+	private Bicicleta bicicletaPreta;
+	private Bicicleta bicicletaAzul;
 
 	@BeforeEach
-	void setUp() {
+	void configurar() {
 		bicicletaArray = new BicicletaArray(5);
-		bicicleta = new Bicicleta(1, "Azul");
+		bicicletaAzul = new Bicicleta(1, "Azul");
+		bicicletaAtualizada = new Bicicleta(1, "Vermelha");
+		bicicletaFalsa = new Bicicleta(10, "Amarela");
+		bicicletaVerde = new Bicicleta(3, "Verde");
+		bicicletaPreta = new Bicicleta(2, "Preta");
 	}
 
 	@Test
-	void shouldInsertBicicleta() {
-		assertTrue(bicicletaArray.inserir(0, bicicleta));
+	void deveInserirBicicleta() {
+		assertTrue(bicicletaArray.inserir(0, bicicletaAzul));
 		assertNotNull(bicicletaArray.getItens()[0]);
 	}
 
 	@Test
-	void shouldRemoveBicicleta() {
-		bicicletaArray.inserir(0, bicicleta);
-		assertTrue(bicicletaArray.pesquisar(bicicleta));
-		assertTrue(bicicletaArray.remover(bicicleta));
+	void deveRemoverBicicleta() {
+		bicicletaArray.inserir(0, bicicletaAzul);
+		assertTrue(bicicletaArray.pesquisar(bicicletaAzul));
+		assertTrue(bicicletaArray.remover(bicicletaAzul));
 		assertNull(bicicletaArray.getItens()[0]);
-		assertFalse(bicicletaArray.pesquisar(bicicleta));
+		assertFalse(bicicletaArray.pesquisar(bicicletaAzul));
 	}
 
 	@Test
-	void shouldNotRemoveObjectNotInArray() {
-		assertFalse(bicicletaArray.remover(bicicleta));
+	void naoDeveRemoverObjetoNaoEncontrado() {
+		assertFalse(bicicletaArray.remover(bicicletaAzul));
 	}
 
 	@Test
-	void shouldReturnTrueWhenModelIsPresent() {
-		bicicletaArray.inserir(0, bicicleta);
-		assertTrue(bicicletaArray.pesquisar(bicicleta));
+	void deveRetornarVerdadeiroQuandoModeloEstiverPresente() {
+		bicicletaArray.inserir(0, bicicletaAzul);
+		assertTrue(bicicletaArray.pesquisar(bicicletaAzul));
 	}
 
 	@Test
-	void shouldReturnFalseWhenModelIsNotPresent() {
-		assertFalse(bicicletaArray.pesquisar(bicicleta));
+	void deveRetornarFalsoQuandoModeloNaoEstiverPresente() {
+		assertFalse(bicicletaArray.pesquisar(bicicletaAzul));
 	}
 
 	@Test
-	void shouldUpdateBicicleta() {
-		bicicletaArray.inserir(0, bicicleta);
-		Bicicleta updatedBicicleta = new Bicicleta(1, "Vermelha");
-		assertTrue(bicicletaArray.atualizar(0, updatedBicicleta));
-		assertNotEquals(bicicleta, bicicletaArray.getItens()[0]);
+	void deveAtualizarBicicleta() {
+		bicicletaArray.inserir(0, bicicletaAzul);
+		assertTrue(bicicletaArray.atualizar(0, bicicletaAtualizada));
+		assertNotEquals(bicicletaAzul, bicicletaArray.getItens()[0]);
 	}
 
 	@Test
-	void shouldNotUpdateModelNotInArray() {
-		Bicicleta fakeBicicleta = new Bicicleta(10, "Amarela");
-		assertFalse(bicicletaArray.atualizar(0, fakeBicicleta));
+	void naoDeveAtualizarModeloNaoEncontrado() {
+		assertFalse(bicicletaArray.atualizar(0, bicicletaFalsa));
 	}
 
 	@Test
-	void shouldNotUpdateIncorrectModelType() {
-		assertFalse(bicicletaArray.atualizar(0, new Bicicleta(2, "Preta")));
+	void naoDeveAtualizarTipoDeModeloIncorreto() {
+		Bicicleta bicicletaPretaAtualizada = new Bicicleta(2, "Preta");
+		assertFalse(bicicletaArray.atualizar(0, bicicletaPretaAtualizada));
 	}
 
 	@Test
-	void shouldSortByIdCrescente() {
-		bicicletaArray.inserir(0, new Bicicleta(3, "Verde"));
-		bicicletaArray.inserir(1, new Bicicleta(2, "Preta"));
-		bicicletaArray.inserir(2, new Bicicleta(1, "Azul"));
+	void deveOrdenarPorIdCrescente() {
+		bicicletaArray.inserir(0, bicicletaVerde);
+		bicicletaArray.inserir(1, bicicletaPreta);
+		bicicletaArray.inserir(2, bicicletaAzul);
 
 		bicicletaArray.ordenarPorIdCrescente();
 
@@ -83,10 +90,10 @@ class BicicletaArrayTest {
 	}
 
 	@Test
-	void shouldSortByIdDecrescente() {
-		bicicletaArray.inserir(0, new Bicicleta(1, "Azul"));
-		bicicletaArray.inserir(1, new Bicicleta(2, "Preta"));
-		bicicletaArray.inserir(2, new Bicicleta(3, "Verde"));
+	void deveOrdenarPorIdDecrescente() {
+		bicicletaArray.inserir(0, bicicletaAzul);
+		bicicletaArray.inserir(1, bicicletaPreta);
+		bicicletaArray.inserir(2, bicicletaVerde);
 
 		bicicletaArray.ordenarPorIdDecrescente();
 

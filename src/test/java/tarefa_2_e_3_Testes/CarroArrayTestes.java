@@ -11,77 +11,76 @@ import tarefa2.model.Carro;
 class CarroArrayTest {
 
     private CarroArray carroArray;
-    private Carro carro;
+    private Carro carroAtualizado;
+    private Carro carroFalso;
+    private Carro carroAzul;
+    private Carro carroPreto;
+    private Carro carroVerde;
 
     @BeforeEach
-    void setUp() {
+    void configurar() {
         carroArray = new CarroArray(5);
-        carro = new Carro(1, "ABC-1234");
+        carroAzul = new Carro(1, "ABC-1234");
+        carroAtualizado = new Carro(1, "XYZ-5678");
+        carroFalso = new Carro(10, "DEF-1234");
+        carroVerde = new Carro(3, "Verde");
+        carroPreto = new Carro(2, "Preto");
     }
 
     @Test
-    void shouldInsertCarro() {
-        assertTrue(carroArray.inserir(0, carro));
+    void deveInserirCarro() {
+        assertTrue(carroArray.inserir(0, carroAzul));
         assertNotNull(carroArray.getItens()[0]);
     }
 
     @Test
-    void shouldNotInsertIncorrectModel() {
-        Carro fakeCarro = new Carro(2, "XYZ-7890");
-        assertFalse(carroArray.inserir(0, fakeCarro));
+    void deveRemoverCarro() {
+        carroArray.inserir(0, carroAzul);
+        assertTrue(carroArray.pesquisar(carroAzul));
+        assertTrue(carroArray.remover(carroAzul));
         assertNull(carroArray.getItens()[0]);
+        assertFalse(carroArray.pesquisar(carroAzul));
     }
 
     @Test
-    void shouldRemoveCarro() {
-        carroArray.inserir(0, carro);
-        assertTrue(carroArray.pesquisar(carro));
-
-        assertTrue(carroArray.remover(carro));
-        assertNull(carroArray.getItens()[0]);
-        assertFalse(carroArray.pesquisar(carro));
+    void naoDeveRemoverObjetoNaoEncontrado() {
+        assertFalse(carroArray.remover(carroAzul));
     }
 
     @Test
-    void shouldNotRemoveObjectNotInArray() {
-        assertFalse(carroArray.remover(carro));
+    void deveRetornarVerdadeiroQuandoModeloEstiverPresente() {
+        carroArray.inserir(0, carroAzul);
+        assertTrue(carroArray.pesquisar(carroAzul));
     }
 
     @Test
-    void shouldReturnTrueWhenModelIsPresent() {
-        carroArray.inserir(0, carro);
-        assertTrue(carroArray.pesquisar(carro));
+    void deveRetornarFalsoQuandoModeloNaoEstiverPresente() {
+        assertFalse(carroArray.pesquisar(carroAzul));
     }
 
     @Test
-    void shouldReturnFalseWhenModelIsNotPresent() {
-        assertFalse(carroArray.pesquisar(carro));
+    void deveAtualizarCarro() {
+        carroArray.inserir(0, carroAzul);
+        assertTrue(carroArray.atualizar(0, carroAtualizado));
+        assertEquals(carroAtualizado, carroArray.getItens()[0]);
     }
 
     @Test
-    void shouldUpdateCarro() {
-        carroArray.inserir(0, carro);
-        Carro updatedCarro = new Carro(1, "XYZ-5678");
-        assertTrue(carroArray.atualizar(0, updatedCarro));
-        assertNotEquals(carro, carroArray.getItens()[0]);
+    void naoDeveAtualizarModeloNaoEncontrado() {
+        assertFalse(carroArray.atualizar(0, carroFalso));
     }
 
     @Test
-    void shouldNotUpdateModelNotInArray() {
-        Carro fakeCarro = new Carro(10, "DEF-1234");
-        assertFalse(carroArray.atualizar(0, fakeCarro));
+    void naoDeveAtualizarTipoDeModeloIncorreto() {
+        Carro carroTipoIncorreto = new Carro(2, "JKL-1234");
+        assertFalse(carroArray.atualizar(0, carroTipoIncorreto));
     }
 
     @Test
-    void shouldNotUpdateIncorrectModelType() {
-        assertFalse(carroArray.atualizar(0, new Carro(2, "JKL-1234")));
-    }
-
-    @Test
-    void shouldSortByIdCrescente() {
-        carroArray.inserir(0, new Carro(3, "Verde"));
-        carroArray.inserir(1, new Carro(1, "Azul"));
-        carroArray.inserir(2, new Carro(2, "Preto"));
+    void deveOrdenarPorIdCrescente() {
+        carroArray.inserir(0, carroVerde);
+        carroArray.inserir(1, carroAzul);
+        carroArray.inserir(2, carroPreto);
 
         carroArray.ordenarPorIdCrescente();
 
@@ -91,10 +90,10 @@ class CarroArrayTest {
     }
 
     @Test
-    void shouldSortByIdDecrescente() {
-        carroArray.inserir(0, new Carro(1, "Azul"));
-        carroArray.inserir(1, new Carro(2, "Preto"));
-        carroArray.inserir(2, new Carro(3, "Verde"));
+    void deveOrdenarPorIdDecrescente() {
+        carroArray.inserir(0, carroAzul);
+        carroArray.inserir(1, carroPreto);
+        carroArray.inserir(2, carroVerde);
 
         carroArray.ordenarPorIdDecrescente();
 

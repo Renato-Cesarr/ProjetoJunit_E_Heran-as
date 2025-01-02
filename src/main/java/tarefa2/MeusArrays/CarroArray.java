@@ -42,7 +42,7 @@ public class CarroArray {
     }
 
     public boolean atualizar(int posicao, Carro carro) {
-        if (posicao < 0 || posicao >= itens.length || carro == null) {
+        if (posicao < 0 || posicao >= itens.length || carro == null || itens[posicao] == null) {
             return false;
         }
         itens[posicao] = carro;

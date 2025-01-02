@@ -42,7 +42,7 @@ public class PessoaArray {
     }
 
     public boolean atualizar(int posicao, Pessoa pessoa) {
-        if (posicao < 0 || posicao >= itens.length || pessoa == null) {
+        if (posicao < 0 || posicao >= itens.length || pessoa == null || itens[posicao] == null) {
             return false;
         }
         itens[posicao] = pessoa;
