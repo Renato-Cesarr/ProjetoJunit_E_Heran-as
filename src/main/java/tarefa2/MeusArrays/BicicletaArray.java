@@ -71,7 +71,7 @@ public class BicicletaArray {
                 }
             }
         }
-    }
+    } 
 
     public Bicicleta[] getItens() {
         return itens;

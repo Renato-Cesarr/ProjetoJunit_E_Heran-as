@@ -37,22 +37,13 @@ public class MyMap<K, V> implements Iterable<MyMap.Entry<K, V>> {
             return value;
         }
 
-        public void setValue(V value) {
-            this.value = value;
-        }
+
 
         @Override
         public int hashCode() {
             return Objects.hash(key, value);
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Entry<?, ?> entry = (Entry<?, ?>) o;
-            return Objects.equals(key, entry.key) && Objects.equals(value, entry.value);
-        }
     }
 
     public MyMap() {
@@ -182,26 +173,4 @@ public class MyMap<K, V> implements Iterable<MyMap.Entry<K, V>> {
         return result;
     }
 
-    public boolean putAll(MyMap<? extends K, ? extends V> map) {
-        boolean changed = false;
-        for (Entry<? extends K, ? extends V> entry : map) {
-            if (put(entry.getKey(), entry.getValue())) {
-                changed = true;
-            }
-        }
-        return changed;
-    }
-
-    public boolean containsAll(Collection<?> c) {
-        for (Object element : c) {
-            if (!(element instanceof Entry)) {
-                return false;
-            }
-            Entry<?, ?> entry = (Entry<?, ?>) element;
-            if (!containsKey(entry.getKey())) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

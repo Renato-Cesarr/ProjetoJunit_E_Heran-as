@@ -8,16 +8,4 @@ public class Bicicleta extends Model {
         this.cor = cor;
     }
 
-    public String getCor() {
-        return cor;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-    @Override
-    public String toString() {
-        return "Bicicleta{id=" + getId() + ", cor='" + cor + "'}";
-    }
 }
