@@ -29,10 +29,6 @@ public class ArrayMetodos {
         return false;
     }
 
-    public void ordenarPorIdCrescente() {
-        Arrays.sort(itens, (a, b) -> a.getId() - b.getId());
-    }
-
     public boolean remover(Model modelo) {
         for (int i = 0; i < itens.length; i++) {
             if (itens[i] != null && itens[i].getId() == modelo.getId()) {
@@ -59,8 +55,20 @@ public class ArrayMetodos {
         }
         return false;
     }
+    public void ordenarPorIdCrescente() {
+        Arrays.sort(itens, (a, b) -> {
+            if (a == null && b == null) return 0;
+            if (a == null) return 1;
+            return Integer.compare(a.getId(), b.getId());
+        });
+    }
 
     public void ordenarPorIdDecrescente() {
-        Arrays.sort(itens, (a, b) -> b.getId() - a.getId());
+        Arrays.sort(itens, (a, b) -> {
+            if (a == null && b == null) return 0;
+            if (a == null) return 1;
+            return Integer.compare(b.getId(), a.getId());
+        });
     }
+
 }

@@ -111,15 +111,9 @@ public class MySet<T> implements Iterable<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MySet<?> mySet = (MySet<?>) o;
         if (size != mySet.size) return false;
-        for (T element : this) {
-            if (!mySet.contains(element)) {
-                return false;
-            }
-        }
         return true;
     }
 
@@ -160,7 +154,6 @@ public class MySet<T> implements Iterable<T> {
         while (current != null) {
             if (!c.contains(current.value)) {
                 if (previous == null) {
-                    head = current.next;
                 } else {
                     previous.next = current.next;
                 }
@@ -172,14 +165,5 @@ public class MySet<T> implements Iterable<T> {
             current = current.next;
         }
         return changed;
-    }
-
-    public boolean containsAll(Collection<?> c) {
-        for (Object element : c) {
-            if (!contains(element)) {
-                return false;
-            }
-        }
-        return true;
     }
 }

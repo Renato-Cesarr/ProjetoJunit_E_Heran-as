@@ -66,10 +66,10 @@ public class MyMap<K, V> implements Iterable<MyMap.Entry<K, V>> {
     public boolean remove(Object key) {
         Node<Entry<K, V>> current = head;
         Node<Entry<K, V>> previous = null;
+
         while (current != null) {
             if (current.value.getKey().equals(key)) {
                 if (previous == null) {
-                    head = current.next;
                 } else {
                     previous.next = current.next;
                 }
@@ -81,6 +81,8 @@ public class MyMap<K, V> implements Iterable<MyMap.Entry<K, V>> {
         }
         return false;
     }
+
+
 
     public boolean containsKey(Object key) {
         Node<Entry<K, V>> current = head;
@@ -129,9 +131,6 @@ public class MyMap<K, V> implements Iterable<MyMap.Entry<K, V>> {
 
             @Override
             public Entry<K, V> next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
                 Entry<K, V> value = current.value;
                 current = current.next;
                 return value;
@@ -152,15 +151,8 @@ public class MyMap<K, V> implements Iterable<MyMap.Entry<K, V>> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         MyMap<?, ?> myMap = (MyMap<?, ?>) o;
         if (size != myMap.size) return false;
-        for (Entry<K, V> entry : this) {
-            if (!myMap.containsKey(entry.getKey()) || !Objects.equals(myMap.get(entry.getKey()), entry.getValue())) {
-                return false;
-            }
-        }
         return true;
     }
 
@@ -168,9 +160,13 @@ public class MyMap<K, V> implements Iterable<MyMap.Entry<K, V>> {
     public int hashCode() {
         int result = 1;
         for (Entry<K, V> entry : this) {
-            result = 31 * result + (entry == null ? 0 : entry.hashCode());
+            result = 31 * result + (entry.hashCode());
         }
         return result;
     }
+
+
+
+
 
 }

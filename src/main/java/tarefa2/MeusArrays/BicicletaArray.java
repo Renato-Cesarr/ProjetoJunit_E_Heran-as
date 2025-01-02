@@ -13,9 +13,6 @@ public class BicicletaArray {
     }
 
     public boolean inserir(int posicao, Bicicleta bicicleta) {
-        if (posicao < 0 || posicao >= itens.length || bicicleta == null) {
-            return false;
-        }
         itens[posicao] = bicicleta;
         tamanho++;
         return true;

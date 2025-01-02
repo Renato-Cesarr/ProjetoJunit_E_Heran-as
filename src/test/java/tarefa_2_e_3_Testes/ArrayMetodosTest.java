@@ -1,22 +1,21 @@
 package tarefa_2_e_3_Testes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tarefa3.ArrayMetodos;
+
 import tarefa2.model.Bicicleta;
 import tarefa2.model.Carro;
-import tarefa2.model.Pessoa;
 import tarefa2.model.Model;
-
-import java.util.logging.Logger;
-
-import static org.junit.jupiter.api.Assertions.*;
+import tarefa2.model.Pessoa;
+import tarefa3.ArrayMetodos;
 
 class ArrayMetodosTest {
 
 	private ArrayMetodos arrayMetodos;
-	private static final Logger logger = Logger.getLogger(ArrayMetodosTest.class.getName());
-
 	private static final Pessoa PESSOA_1 = new Pessoa(1, "Pessoa 1");
 	private static final Bicicleta BICICLETA_1 = new Bicicleta(2, "Bicicleta 1");
 	private static final Carro CARRO_1 = new Carro(3, "Carro 1");
@@ -36,16 +35,6 @@ class ArrayMetodosTest {
 		assertFalse(arrayMetodos.inserir(POSICAO_VALIDA, null));
 	}
 
-	@Test
-	void testOrdenarPorIdCrescente() {
-		arrayMetodos.inserir(0, PESSOA_1);
-		arrayMetodos.inserir(1, BICICLETA_1);
-		arrayMetodos.inserir(2, CARRO_1);
-
-		assertEquals(PESSOA_1, arrayMetodos.getItens()[0]);
-		assertEquals(BICICLETA_1, arrayMetodos.getItens()[1]);
-		assertEquals(CARRO_1, arrayMetodos.getItens()[2]);
-	}
 
 	@Test
 	void testRemover() {
@@ -73,15 +62,6 @@ class ArrayMetodosTest {
 	}
 
 	@Test
-	void testOrdenarPorIdDecrescente() {
-		arrayMetodos.inserir(0, PESSOA_1);
-		arrayMetodos.inserir(1, BICICLETA_1);
-		arrayMetodos.inserir(2, CARRO_1);
-
-		assertEquals(BICICLETA_1, arrayMetodos.getItens()[1]);
-	}
-
-	@Test
 	void testInserirValoresInvalidos() {
 		arrayMetodos.inserir(POSICAO_VALIDA, null);
 
@@ -94,4 +74,29 @@ class ArrayMetodosTest {
 		arrayMetodos.atualizar(POSICAO_INVALIDA, PESSOA_1);
 
 	}
+	@Test
+	void testOrdenarPorIdCrescente() {
+	    arrayMetodos.inserir(0, CARRO_1);       
+	    arrayMetodos.inserir(1, PESSOA_1);      
+	    arrayMetodos.inserir(2, BICICLETA_1);   
+
+	    arrayMetodos.ordenarPorIdCrescente();
+
+	    assertEquals(PESSOA_1, arrayMetodos.getItens()[0]);
+	    assertEquals(BICICLETA_1, arrayMetodos.getItens()[1]);
+	    assertEquals(CARRO_1, arrayMetodos.getItens()[2]);
+	}
+
+	@Test
+	void testOrdenarPorIdDecrescente() {
+	    arrayMetodos.inserir(0, PESSOA_1);    
+	    arrayMetodos.inserir(1, BICICLETA_1);  
+	    arrayMetodos.inserir(2, CARRO_1);       
+	    arrayMetodos.ordenarPorIdDecrescente();
+
+	    assertEquals(CARRO_1, arrayMetodos.getItens()[0]);
+	    assertEquals(BICICLETA_1, arrayMetodos.getItens()[1]);
+	    assertEquals(PESSOA_1, arrayMetodos.getItens()[2]);
+	}
+
 }

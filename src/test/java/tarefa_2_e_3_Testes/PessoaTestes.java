@@ -108,4 +108,40 @@ class PessoaArrayTest {
             assertEquals(1, pessoaArray.getItens()[2].getId());
 
     }
+    @Test
+    void testOrdenarPorIdCrescenteComNulos() {
+        Pessoa pessoa1 = new Pessoa(2, "Pessoa 2");
+        Pessoa pessoa2 = new Pessoa(1, "Pessoa 1");
+
+        PessoaArray pessoaArray = new PessoaArray(3);
+        pessoaArray.inserir(0, pessoa1);
+        pessoaArray.inserir(1, null);
+        pessoaArray.inserir(2, pessoa2);
+
+        pessoaArray.ordenarPorIdCrescente();
+
+        Pessoa[] itens = pessoaArray.getItens();
+        assertEquals(pessoa2, itens[0]);
+    }
+    
+    @Test
+    void testOrdenarPorIdCrescente() {
+        Pessoa pessoa1 = new Pessoa(3, "Pessoa 3");
+        Pessoa pessoa2 = new Pessoa(1, "Pessoa 1");
+        Pessoa pessoa3 = new Pessoa(2, "Pessoa 2");
+
+        PessoaArray pessoaArray = new PessoaArray(3);
+        pessoaArray.inserir(0, pessoa1);
+        pessoaArray.inserir(1, pessoa2);
+        pessoaArray.inserir(2, pessoa3);
+
+        pessoaArray.ordenarPorIdCrescente();
+
+        Pessoa[] itens = pessoaArray.getItens();
+        assertEquals(pessoa2, itens[0]);
+        assertEquals(pessoa3, itens[1]);
+        assertEquals(pessoa1, itens[2]);
+    }
+
+
 }
