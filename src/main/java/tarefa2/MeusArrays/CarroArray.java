@@ -5,7 +5,7 @@ import tarefa2.model.Carro;
 public class CarroArray {
 
     private Carro[] itens;
-    private int tamanho;
+    int tamanho;
 
     public CarroArray(int capacidade) {
         itens = new Carro[capacidade];
@@ -13,9 +13,6 @@ public class CarroArray {
     }
 
     public boolean inserir(int posicao, Carro carro) {
-        if (posicao < 0 || posicao >= itens.length || carro == null) {
-            return false;
-        }
         itens[posicao] = carro;
         tamanho++;
         return true;

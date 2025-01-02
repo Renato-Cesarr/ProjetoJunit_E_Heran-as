@@ -45,7 +45,6 @@ public class MyList<T> implements Iterable<T> {
         while (current != null) {
             if (current.value.equals(value)) {
                 if (previous == null) {
-                    head = current.next;
                 } else {
                     previous.next = current.next;
                 }
@@ -91,7 +90,6 @@ public class MyList<T> implements Iterable<T> {
 
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index fora dos limites: " + index);
         }
     }
 
@@ -107,9 +105,6 @@ public class MyList<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
                 T value = current.value;
                 current = current.next;
                 return value;
@@ -130,17 +125,10 @@ public class MyList<T> implements Iterable<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         MyList<?> myList = (MyList<?>) o;
         if (size != myList.size) return false;
         Iterator<T> iterator1 = iterator();
         Iterator<?> iterator2 = myList.iterator();
-        while (iterator1.hasNext() && iterator2.hasNext()) {
-            if (!iterator1.next().equals(iterator2.next())) {
-                return false;
-            }
-        }
         return true;
     }
 
@@ -148,7 +136,7 @@ public class MyList<T> implements Iterable<T> {
     public int hashCode() {
         int result = 1;
         for (T element : this) {
-            result = 31 * result + (element == null ? 0 : element.hashCode());
+            result = 31 * result + (element.hashCode());
         }
         return result;
     }
@@ -182,7 +170,6 @@ public class MyList<T> implements Iterable<T> {
                 if (previous == null) {
                     head = current.next;
                 } else {
-                    previous.next = current.next;
                 }
                 size--;
                 changed = true;

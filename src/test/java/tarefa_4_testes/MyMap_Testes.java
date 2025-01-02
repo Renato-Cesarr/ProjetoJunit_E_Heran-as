@@ -1,10 +1,14 @@
 package tarefa_4_testes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tarefa4.MyMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import tarefa4.MyMap;
 
 class MyMapTest {
 
@@ -25,110 +29,109 @@ class MyMapTest {
 
     @Test
     void testPutAndGet() {
-            map.put(KEY_1, VALUE_10);
-            map.put(KEY_2, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        map.put(KEY_2, VALUE_20);
 
-            assertEquals(VALUE_10, map.get(KEY_1));
-            assertEquals(VALUE_20, map.get(KEY_2));
-            assertNull(map.get(KEY_NON_EXISTENT));
-
+        assertEquals(VALUE_10, map.get(KEY_1));
+        assertEquals(VALUE_20, map.get(KEY_2));
+        assertNull(map.get(KEY_NON_EXISTENT));
     }
 
     @Test
     void testPutDuplicateKey() {
-            map.put(KEY_1, VALUE_10);
-            boolean result = map.put(KEY_1, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        boolean result = map.put(KEY_1, VALUE_20);
 
-            assertFalse(result);
-            assertEquals(VALUE_10, map.get(KEY_1));
+        assertFalse(result);
+        assertEquals(VALUE_10, map.get(KEY_1));
     }
 
     @Test
     void testRemove() {
-            map.put(KEY_1, VALUE_10);
-            map.put(KEY_2, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        map.put(KEY_2, VALUE_20);
 
-            assertTrue(map.remove(KEY_1));
-            assertNull(map.get(KEY_1));
+        assertTrue(map.remove(KEY_1));
+        assertNull(map.get(KEY_1));
 
-            assertFalse(map.remove(KEY_NON_EXISTENT));
+        assertFalse(map.remove(KEY_NON_EXISTENT));
     }
 
     @Test
     void testContainsKey() {
-            map.put(KEY_1, VALUE_10);
+        map.put(KEY_1, VALUE_10);
 
-            assertTrue(map.containsKey(KEY_1));
-            assertFalse(map.containsKey(KEY_NON_EXISTENT));
+        assertTrue(map.containsKey(KEY_1));
+        assertFalse(map.containsKey(KEY_NON_EXISTENT));
     }
 
     @Test
     void testSize() {
-            assertEquals(0, map.size());
+        assertEquals(0, map.size());
 
-            map.put(KEY_1, VALUE_10);
-            map.put(KEY_2, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        map.put(KEY_2, VALUE_20);
 
-            assertEquals(2, map.size());
+        assertEquals(2, map.size());
     }
 
     @Test
     void testClear() {
-            map.put(KEY_1, VALUE_10);
-            map.put(KEY_2, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        map.put(KEY_2, VALUE_20);
 
-            map.clear();
+        map.clear();
 
-            assertTrue(map.isEmpty());
-            assertEquals(0, map.size());
+        assertTrue(map.isEmpty());
+        assertEquals(0, map.size());
     }
 
     @Test
     void testIsEmpty() {
-            assertTrue(map.isEmpty());
+        assertTrue(map.isEmpty());
 
-            map.put(KEY_1, VALUE_10);
+        map.put(KEY_1, VALUE_10);
 
-            assertFalse(map.isEmpty());
+        assertFalse(map.isEmpty());
     }
 
     @Test
     void testToArray() {
-            map.put(KEY_1, VALUE_10);
-            map.put(KEY_2, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        map.put(KEY_2, VALUE_20);
 
-            Object[] array = map.toArray();
+        Object[] array = map.toArray();
 
-            assertEquals(2, array.length);
-            assertTrue(containsEntry(array, KEY_1, VALUE_10));
-            assertTrue(containsEntry(array, KEY_2, VALUE_20));
+        assertEquals(2, array.length);
+        assertTrue(containsEntry(array, KEY_1, VALUE_10));
+        assertTrue(containsEntry(array, KEY_2, VALUE_20));
     }
 
     @Test
     void testEquals() {
-            map.put(KEY_1, VALUE_10);
-            map.put(KEY_2, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        map.put(KEY_2, VALUE_20);
 
-            MyMap<String, Integer> otherMap = new MyMap<>();
-            otherMap.put(KEY_1, VALUE_10);
-            otherMap.put(KEY_2, VALUE_20);
+        MyMap<String, Integer> otherMap = new MyMap<>();
+        otherMap.put(KEY_1, VALUE_10);
+        otherMap.put(KEY_2, VALUE_20);
 
-            assertTrue(map.equals(otherMap));
+        assertTrue(map.equals(otherMap));
 
-            otherMap.put("key3", VALUE_30);
-            assertFalse(map.equals(otherMap));
+        otherMap.put("key3", VALUE_30);
+        assertFalse(map.equals(otherMap));
     }
 
     @Test
     void testHashCode() {
-            map.put(KEY_1, VALUE_10);
-            map.put(KEY_2, VALUE_20);
+        map.put(KEY_1, VALUE_10);
+        map.put(KEY_2, VALUE_20);
 
-            MyMap<String, Integer> otherMap = new MyMap<>();
-            otherMap.put(KEY_1, VALUE_10);
-            otherMap.put(KEY_2, VALUE_20);
+        MyMap<String, Integer> otherMap = new MyMap<>();
+        otherMap.put(KEY_1, VALUE_10);
+        otherMap.put(KEY_2, VALUE_20);
 
-            assertEquals(map.hashCode(), otherMap.hashCode());
+        assertEquals(map.hashCode(), otherMap.hashCode());
     }
 
     @Test
@@ -149,14 +152,12 @@ class MyMapTest {
             }
         }
         assertEquals(2, count);
-        assertTrue(key1Found, "KEY_1 não foi encontrado no iterador.");
-        assertTrue(key2Found, "KEY_2 não foi encontrado no iterador.");
+        assertTrue(key1Found);
+        assertTrue(key2Found);
     }
 
-
-
     private boolean containsEntry(Object[] array, String key, Integer value) {
-        boolean encontrado = false;
+        boolean found = false;
 
         if (array != null && key != null && value != null) {
             for (Object obj : array) {
@@ -166,15 +167,14 @@ class MyMapTest {
 
                     if (entryKey != null && entryValue != null &&
                         entryKey.equals(key) && entryValue.equals(value)) {
-                        encontrado = true;
-                        break; 
+                        found = true;
+                        break;
                     }
                 }
             }
         }
 
-        return encontrado;
+        return found;
     }
 
-    
 }
