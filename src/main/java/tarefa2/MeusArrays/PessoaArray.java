@@ -49,6 +49,30 @@ public class PessoaArray {
         return true;
     }
 
+    public void ordenarPorIdCrescente() {
+        for (int i = 0; i < itens.length - 1; i++) {
+            for (int j = i + 1; j < itens.length; j++) {
+                if (itens[i] != null && itens[j] != null && itens[i].getId() > itens[j].getId()) {
+                    Pessoa temp = itens[i];
+                    itens[i] = itens[j];
+                    itens[j] = temp;
+                }
+            }
+        }
+    }
+
+    public void ordenarPorIdDecrescente() {
+        for (int i = 0; i < itens.length - 1; i++) {
+            for (int j = i + 1; j < itens.length; j++) {
+                if (itens[i] != null && itens[j] != null && itens[i].getId() < itens[j].getId()) {
+                    Pessoa temp = itens[i];
+                    itens[i] = itens[j];
+                    itens[j] = temp;
+                }
+            }
+        }
+    }
+
     public Pessoa[] getItens() {
         return itens;
     }

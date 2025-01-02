@@ -27,7 +27,6 @@ class PessoaArrayTest {
 
     @Test
     void shouldNotInsertIncorrectModel() {
-        // Não podemos passar um modelo genérico, devemos passar uma Pessoa ou outro tipo concreto
         Pessoa fakePessoa = new Pessoa(2, "Carlos");
         assertFalse(pessoaArray.inserir(0, fakePessoa));
         assertNull(pessoaArray.getItens()[0]);

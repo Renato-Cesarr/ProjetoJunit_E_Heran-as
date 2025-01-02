@@ -42,11 +42,35 @@ public class BicicletaArray {
     }
 
     public boolean atualizar(int posicao, Bicicleta bicicleta) {
-        if (posicao < 0 || posicao >= itens.length || bicicleta == null) {
+        if (posicao < 0 || posicao >= itens.length || bicicleta == null || itens[posicao] == null) {
             return false;
         }
         itens[posicao] = bicicleta;
         return true;
+    }
+
+    public void ordenarPorIdCrescente() {
+        for (int i = 0; i < itens.length - 1; i++) {
+            for (int j = i + 1; j < itens.length; j++) {
+                if (itens[i] != null && itens[j] != null && itens[i].getId() > itens[j].getId()) {
+                    Bicicleta temp = itens[i];
+                    itens[i] = itens[j];
+                    itens[j] = temp;
+                }
+            }
+        }
+    }
+
+    public void ordenarPorIdDecrescente() {
+        for (int i = 0; i < itens.length - 1; i++) {
+            for (int j = i + 1; j < itens.length; j++) {
+                if (itens[i] != null && itens[j] != null && itens[i].getId() < itens[j].getId()) {
+                    Bicicleta temp = itens[i];
+                    itens[i] = itens[j];
+                    itens[j] = temp;
+                }
+            }
+        }
     }
 
     public Bicicleta[] getItens() {
