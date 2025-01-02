@@ -1,11 +1,13 @@
 package tarefa3;
 
 import java.util.Arrays;
-import java.util.Random;
 
+import tarefa2.model.Bicicleta;
+import tarefa2.model.Carro;
 import tarefa2.model.Model;
+import tarefa2.model.Pessoa;
 
-class ArrayMetodos {
+public class ArrayMetodos {
 
     private Model[] itens;
 
@@ -16,15 +18,17 @@ class ArrayMetodos {
     public Model[] getItens() {
         return itens;
     }
-    
+
     public boolean inserir(int posicao, Model modelo) {
-        if (posicao >= 0 && posicao < itens.length) {
-            itens[posicao] = modelo;
-            return true;
+        if (posicao >= 0 && posicao < itens.length && modelo != null) {
+            if (modelo instanceof Pessoa || modelo instanceof Bicicleta || modelo instanceof Carro) {
+                itens[posicao] = modelo;
+                return true;
+            }
         }
         return false;
     }
-    
+
     public void ordenarPorIdCrescente() {
         Arrays.sort(itens, (a, b) -> a.getId() - b.getId());
     }
@@ -49,14 +53,14 @@ class ArrayMetodos {
     }
 
     public boolean atualizar(int posicao, Model modelo) {
-        if (posicao >= 0 && posicao < itens.length && itens[posicao] != null) {
+        if (posicao >= 0 && posicao < itens.length && modelo != null && itens[posicao] != null) {
             itens[posicao] = modelo;
             return true;
         }
         return false;
     }
+
     public void ordenarPorIdDecrescente() {
         Arrays.sort(itens, (a, b) -> b.getId() - a.getId());
     }
-
 }

@@ -1,71 +1,55 @@
 package tarefa2.MeusArrays;
 
-import java.util.Arrays;
-
 import tarefa2.model.Carro;
-import tarefa2.model.Model;
 
 public class CarroArray {
-    private Model[] itens;
 
-    public CarroArray(int tamanho) {
-        this.itens = new Model[tamanho];
+    private Carro[] itens;
+    private int tamanho;
+
+    public CarroArray(int capacidade) {
+        itens = new Carro[capacidade];
+        tamanho = 0;
     }
 
-    public boolean inserir(int posicao, Model modelo) {
-        if (modelo instanceof Carro && posicao >= 0 && posicao < itens.length) {
-            itens[posicao] = modelo;
-            return true;
+    public boolean inserir(int posicao, Carro carro) {
+        if (posicao < 0 || posicao >= itens.length || carro == null) {
+            return false;
         }
-        return false;
+        itens[posicao] = carro;
+        tamanho++;
+        return true;
     }
 
-    public boolean remover(Model modelo) {
-        if (modelo instanceof Carro) {
-            for (int i = 0; i < itens.length; i++) {
-                if (itens[i] != null && itens[i].getId() == modelo.getId()) {
-                    itens[i] = null;
-                    return true;
-                }
+    public boolean remover(Carro carro) {
+        for (int i = 0; i < itens.length; i++) {
+            if (itens[i] != null && itens[i].equals(carro)) {
+                itens[i] = null;
+                tamanho--;
+                return true;
             }
         }
         return false;
     }
 
-    public boolean pesquisar(Model modelo) {
-        if (modelo instanceof Carro) {
-            for (Model item : itens) {
-                if (item != null && item.getId() == modelo.getId()) {
-                    return true;
-                }
+    public boolean pesquisar(Carro carro) {
+        for (Carro c : itens) {
+            if (c != null && c.equals(carro)) {
+                return true;
             }
         }
         return false;
     }
 
-    public void ordenarPorIdCrescente() {
-        Arrays.sort(itens, (a, b) -> {
-            if (a instanceof Carro && b instanceof Carro) {
-                return Integer.compare(a.getId(), b.getId());
-            }
-            return 0;
-        });
-    }
-
-    public void ordenarPorIdDecrescente() {
-        Arrays.sort(itens, (a, b) -> {
-            if (a instanceof Carro && b instanceof Carro) {
-                return Integer.compare(b.getId(), a.getId());
-            }
-            return 0;
-        });
-    }
-
-    public boolean atualizar(int posicao, Model modelo) {
-        if (modelo instanceof Carro && posicao >= 0 && posicao < itens.length && itens[posicao] != null) {
-            itens[posicao] = modelo;
-            return true;
+    public boolean atualizar(int posicao, Carro carro) {
+        if (posicao < 0 || posicao >= itens.length || carro == null) {
+            return false;
         }
-        return false;
+        itens[posicao] = carro;
+        return true;
+    }
+
+    public Carro[] getItens() {
+        return itens;
     }
 }

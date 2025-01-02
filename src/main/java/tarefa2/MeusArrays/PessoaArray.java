@@ -1,71 +1,55 @@
 package tarefa2.MeusArrays;
 
-import java.util.Arrays;
-
-import tarefa2.model.Model;
 import tarefa2.model.Pessoa;
 
 public class PessoaArray {
-    private Model[] itens;
 
-    public PessoaArray(int tamanho) {
-        this.itens = new Model[tamanho];
+    private Pessoa[] itens;
+    private int tamanho;
+
+    public PessoaArray(int capacidade) {
+        itens = new Pessoa[capacidade];
+        tamanho = 0;
     }
 
-    public boolean inserir(int posicao, Model modelo) {
-        if (modelo instanceof Pessoa && posicao >= 0 && posicao < itens.length) {
-            itens[posicao] = modelo;
-            return true;
+    public boolean inserir(int posicao, Pessoa pessoa) {
+        if (posicao < 0 || posicao >= itens.length || pessoa == null) {
+            return false;
         }
-        return false;
+        itens[posicao] = pessoa;
+        tamanho++;
+        return true;
     }
 
-    public boolean remover(Model modelo) {
-        if (modelo instanceof Pessoa) {
-            for (int i = 0; i < itens.length; i++) {
-                if (itens[i] != null && itens[i].getId() == modelo.getId()) {
-                    itens[i] = null;
-                    return true;
-                }
+    public boolean remover(Pessoa pessoa) {
+        for (int i = 0; i < itens.length; i++) {
+            if (itens[i] != null && itens[i].equals(pessoa)) {
+                itens[i] = null;
+                tamanho--;
+                return true;
             }
         }
         return false;
     }
 
-    public boolean pesquisar(Model modelo) {
-        if (modelo instanceof Pessoa) {
-            for (Model item : itens) {
-                if (item != null && item.getId() == modelo.getId()) {
-                    return true;
-                }
+    public boolean pesquisar(Pessoa pessoa) {
+        for (Pessoa p : itens) {
+            if (p != null && p.equals(pessoa)) {
+                return true;
             }
         }
         return false;
     }
 
-    public void ordenarPorIdCrescente() {
-        Arrays.sort(itens, (a, b) -> {
-            if (a instanceof Pessoa && b instanceof Pessoa) {
-                return Integer.compare(a.getId(), b.getId());
-            }
-            return 0;
-        });
-    }
-
-    public void ordenarPorIdDecrescente() {
-        Arrays.sort(itens, (a, b) -> {
-            if (a instanceof Pessoa && b instanceof Pessoa) {
-                return Integer.compare(b.getId(), a.getId());
-            }
-            return 0;
-        });
-    }
-
-    public boolean atualizar(int posicao, Model modelo) {
-        if (modelo instanceof Pessoa && posicao >= 0 && posicao < itens.length && itens[posicao] != null) {
-            itens[posicao] = modelo;
-            return true;
+    public boolean atualizar(int posicao, Pessoa pessoa) {
+        if (posicao < 0 || posicao >= itens.length || pessoa == null) {
+            return false;
         }
-        return false;
+        itens[posicao] = pessoa;
+        return true;
+    }
+
+    public Pessoa[] getItens() {
+        return itens;
     }
 }

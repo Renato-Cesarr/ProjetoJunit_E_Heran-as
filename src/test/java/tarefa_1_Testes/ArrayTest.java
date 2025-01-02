@@ -1,3 +1,4 @@
+package tarefa_1_Testes;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

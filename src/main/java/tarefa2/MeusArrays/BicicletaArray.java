@@ -1,71 +1,55 @@
 package tarefa2.MeusArrays;
 
-import java.util.Arrays;
-
 import tarefa2.model.Bicicleta;
-import tarefa2.model.Model;
 
 public class BicicletaArray {
-    private Model[] itens;
 
-    public BicicletaArray(int tamanho) {
-        this.itens = new Model[tamanho];
+    private Bicicleta[] itens;
+    private int tamanho;
+
+    public BicicletaArray(int capacidade) {
+        itens = new Bicicleta[capacidade];
+        tamanho = 0;
     }
 
-    public boolean inserir(int posicao, Model modelo) {
-        if (modelo instanceof Bicicleta && posicao >= 0 && posicao < itens.length) {
-            itens[posicao] = modelo;
-            return true;
+    public boolean inserir(int posicao, Bicicleta bicicleta) {
+        if (posicao < 0 || posicao >= itens.length || bicicleta == null) {
+            return false;
         }
-        return false;
+        itens[posicao] = bicicleta;
+        tamanho++;
+        return true;
     }
 
-    public boolean remover(Model modelo) {
-        if (modelo instanceof Bicicleta) {
-            for (int i = 0; i < itens.length; i++) {
-                if (itens[i] != null && itens[i].getId() == modelo.getId()) {
-                    itens[i] = null;
-                    return true;
-                }
+    public boolean remover(Bicicleta bicicleta) {
+        for (int i = 0; i < itens.length; i++) {
+            if (itens[i] != null && itens[i].equals(bicicleta)) {
+                itens[i] = null;
+                tamanho--;
+                return true;
             }
         }
         return false;
     }
 
-    public boolean pesquisar(Model modelo) {
-        if (modelo instanceof Bicicleta) {
-            for (Model item : itens) {
-                if (item != null && item.getId() == modelo.getId()) {
-                    return true;
-                }
+    public boolean pesquisar(Bicicleta bicicleta) {
+        for (Bicicleta b : itens) {
+            if (b != null && b.equals(bicicleta)) {
+                return true;
             }
         }
         return false;
     }
 
-    public void ordenarPorIdCrescente() {
-        Arrays.sort(itens, (a, b) -> {
-            if (a instanceof Bicicleta && b instanceof Bicicleta) {
-                return Integer.compare(a.getId(), b.getId());
-            }
-            return 0;
-        });
-    }
-
-    public void ordenarPorIdDecrescente() {
-        Arrays.sort(itens, (a, b) -> {
-            if (a instanceof Bicicleta && b instanceof Bicicleta) {
-                return Integer.compare(b.getId(), a.getId());
-            }
-            return 0;
-        });
-    }
-
-    public boolean atualizar(int posicao, Model modelo) {
-        if (modelo instanceof Bicicleta && posicao >= 0 && posicao < itens.length && itens[posicao] != null) {
-            itens[posicao] = modelo;
-            return true;
+    public boolean atualizar(int posicao, Bicicleta bicicleta) {
+        if (posicao < 0 || posicao >= itens.length || bicicleta == null) {
+            return false;
         }
-        return false;
+        itens[posicao] = bicicleta;
+        return true;
+    }
+
+    public Bicicleta[] getItens() {
+        return itens;
     }
 }
