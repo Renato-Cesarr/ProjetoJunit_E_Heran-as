@@ -159,16 +159,15 @@ public class MySet<T> implements Iterable<T> {
 
         while (current != null) {
             if (!c.contains(current.value)) {
-                // Remover o elemento que não está na coleção
                 if (previous == null) {
-                    head = current.next; // Remove o primeiro
+                    head = current.next;
                 } else {
-                    previous.next = current.next; // Remove do meio
+                    previous.next = current.next;
                 }
                 size--;
                 changed = true;
             } else {
-                previous = current; // Avança para o próximo
+                previous = current;
             }
             current = current.next;
         }

@@ -11,7 +11,7 @@ public class PessoaArray {
         itens = new Pessoa[capacidade];
         tamanho = 0;
     }
-
+ 
     public boolean inserir(int posicao, Pessoa pessoa) {
         if (posicao < 0 || posicao >= itens.length || pessoa == null) {
             return false;

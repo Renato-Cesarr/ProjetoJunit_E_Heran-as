@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import tarefa2.MeusArrays.CarroArray;
 import tarefa2.model.Carro;
 
 class CarroArrayTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(CarroArrayTest.class);
     private CarroArray carroArray;
     private Carro carroAtualizado;
     private Carro carroFalso;
@@ -29,76 +32,78 @@ class CarroArrayTest {
 
     @Test
     void deveInserirCarro() {
-        assertTrue(carroArray.inserir(0, carroAzul));
-        assertNotNull(carroArray.getItens()[0]);
+            assertTrue(carroArray.inserir(0, carroAzul));
+            assertNotNull(carroArray.getItens()[0]);
+
     }
 
     @Test
     void deveRemoverCarro() {
-        carroArray.inserir(0, carroAzul);
-        assertTrue(carroArray.pesquisar(carroAzul));
-        assertTrue(carroArray.remover(carroAzul));
-        assertNull(carroArray.getItens()[0]);
-        assertFalse(carroArray.pesquisar(carroAzul));
+            carroArray.inserir(0, carroAzul);
+            assertTrue(carroArray.pesquisar(carroAzul));
+            assertTrue(carroArray.remover(carroAzul));
+            assertNull(carroArray.getItens()[0]);
+            assertFalse(carroArray.pesquisar(carroAzul));
     }
 
     @Test
     void naoDeveRemoverObjetoNaoEncontrado() {
-        assertFalse(carroArray.remover(carroAzul));
+            assertFalse(carroArray.remover(carroAzul));
     }
 
     @Test
     void deveRetornarVerdadeiroQuandoModeloEstiverPresente() {
-        carroArray.inserir(0, carroAzul);
-        assertTrue(carroArray.pesquisar(carroAzul));
+            carroArray.inserir(0, carroAzul);
+            assertTrue(carroArray.pesquisar(carroAzul));
     }
 
     @Test
     void deveRetornarFalsoQuandoModeloNaoEstiverPresente() {
-        assertFalse(carroArray.pesquisar(carroAzul));
+            assertFalse(carroArray.pesquisar(carroAzul));  
     }
 
     @Test
     void deveAtualizarCarro() {
-        carroArray.inserir(0, carroAzul);
-        assertTrue(carroArray.atualizar(0, carroAtualizado));
-        assertEquals(carroAtualizado, carroArray.getItens()[0]);
+            carroArray.inserir(0, carroAzul);
+            assertTrue(carroArray.atualizar(0, carroAtualizado));
+            assertEquals(carroAtualizado, carroArray.getItens()[0]);
     }
 
     @Test
     void naoDeveAtualizarModeloNaoEncontrado() {
-        assertFalse(carroArray.atualizar(0, carroFalso));
+            assertFalse(carroArray.atualizar(0, carroFalso));
     }
 
     @Test
     void naoDeveAtualizarTipoDeModeloIncorreto() {
-        Carro carroTipoIncorreto = new Carro(2, "JKL-1234");
-        assertFalse(carroArray.atualizar(0, carroTipoIncorreto));
+            Carro carroTipoIncorreto = new Carro(2, "JKL-1234");
+            assertFalse(carroArray.atualizar(0, carroTipoIncorreto));
     }
 
     @Test
     void deveOrdenarPorIdCrescente() {
-        carroArray.inserir(0, carroVerde);
-        carroArray.inserir(1, carroAzul);
-        carroArray.inserir(2, carroPreto);
+            carroArray.inserir(0, carroVerde);
+            carroArray.inserir(1, carroAzul);
+            carroArray.inserir(2, carroPreto);
 
-        carroArray.ordenarPorIdCrescente();
+            carroArray.ordenarPorIdCrescente();
 
-        assertEquals(1, carroArray.getItens()[0].getId());
-        assertEquals(2, carroArray.getItens()[1].getId());
-        assertEquals(3, carroArray.getItens()[2].getId());
+            assertEquals(1, carroArray.getItens()[0].getId());
+            assertEquals(2, carroArray.getItens()[1].getId());
+            assertEquals(3, carroArray.getItens()[2].getId());
     }
 
     @Test
     void deveOrdenarPorIdDecrescente() {
-        carroArray.inserir(0, carroAzul);
-        carroArray.inserir(1, carroPreto);
-        carroArray.inserir(2, carroVerde);
+            carroArray.inserir(0, carroAzul);
+            carroArray.inserir(1, carroPreto);
+            carroArray.inserir(2, carroVerde);
 
-        carroArray.ordenarPorIdDecrescente();
+            carroArray.ordenarPorIdDecrescente();
 
-        assertEquals(3, carroArray.getItens()[0].getId());
-        assertEquals(2, carroArray.getItens()[1].getId());
-        assertEquals(1, carroArray.getItens()[2].getId());
+            assertEquals(3, carroArray.getItens()[0].getId());
+            assertEquals(2, carroArray.getItens()[1].getId());
+            assertEquals(1, carroArray.getItens()[2].getId());
+ 
     }
 }
