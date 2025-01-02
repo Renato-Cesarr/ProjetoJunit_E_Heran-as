@@ -135,15 +135,12 @@ class MySet_Test {
         set.add(ELEMENT_2);
         set.add(ELEMENT_3);
         
-        // Retenho apenas ELEMENT_2 e ELEMENT_3
-        assertTrue(set.retainAll(COLLECTION_1));  
-        assertEquals(2, set.size());  // Tamanho esperado é 2
+        assertTrue(set.retainAll(COLLECTION_1)); 
+        assertEquals(2, set.size());
         
-        // ELEMENT_2 e ELEMENT_3 devem permanecer
         assertTrue(set.contains(ELEMENT_2));
         assertTrue(set.contains(ELEMENT_3));
         
-        // ELEMENT_1 deve ser removido
         assertFalse(set.contains(ELEMENT_1));
     }
 

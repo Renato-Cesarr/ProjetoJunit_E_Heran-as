@@ -23,7 +23,7 @@ class MyMapTest {
         map = new MyMap<>();
     }
 
-    @Test
+    @Test 
     void testPutAndGet() {
         map.put(KEY_1, VALUE_10);
         map.put(KEY_2, VALUE_20);
