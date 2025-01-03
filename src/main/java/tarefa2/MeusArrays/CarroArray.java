@@ -1,76 +1,68 @@
 package tarefa2.MeusArrays;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import tarefa2.model.Carro;
+import tarefa2.model.Model;
+import tarefa3.ArrayMetodos;
 
-public class CarroArray {
+public class CarroArray extends ArrayMetodos {
+    private static final Logger LOGGER = Logger.getLogger(CarroArray.class.getName());
 
-    private Carro[] itens;
-    int tamanho;
-
-    public CarroArray(int capacidade) {
-        itens = new Carro[capacidade];
-        tamanho = 0;
+    public CarroArray(int tamanho) {
+        super(tamanho);
     }
 
-    public boolean inserir(int posicao, Carro carro) {
-        itens[posicao] = carro;
-        tamanho++;
-        return true;
-    }
-
-    public boolean remover(Carro carro) {
-        for (int i = 0; i < itens.length; i++) {
-            if (itens[i] != null && itens[i].equals(carro)) {
-                itens[i] = null;
-                tamanho--;
-                return true;
+    @Override
+    public boolean inserir(int posicao, Model modelo) {
+        try {
+            if (!(modelo instanceof Carro)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser adicionados.");
             }
+            return super.inserir(posicao, modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e;
         }
-        return false;
     }
 
-    public boolean pesquisar(Carro carro) {
-        for (Carro c : itens) {
-            if (c != null && c.equals(carro)) {
-                return true;
+    @Override
+    public boolean remover(Model modelo) {
+        try {
+            if (!(modelo instanceof Carro)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser removidos.");
             }
+            return super.remover(modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e;
         }
-        return false;
     }
 
-    public boolean atualizar(int posicao, Carro carro) {
-        if (posicao < 0 || posicao >= itens.length || carro == null || itens[posicao] == null) {
-            return false;
-        }
-        itens[posicao] = carro;
-        return true;
-    }
-
-    public void ordenarPorIdCrescente() {
-        for (int i = 0; i < itens.length - 1; i++) {
-            for (int j = i + 1; j < itens.length; j++) {
-                if (itens[i] != null && itens[j] != null && itens[i].getId() > itens[j].getId()) {
-                    Carro temp = itens[i];
-                    itens[i] = itens[j];
-                    itens[j] = temp;
-                }
+    @Override
+    public boolean pesquisar(Model modelo) {
+        try {
+            if (!(modelo instanceof Carro)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser pesquisados.");
             }
-        }
-    }
- 
-    public void ordenarPorIdDecrescente() {
-        for (int i = 0; i < itens.length - 1; i++) {
-            for (int j = i + 1; j < itens.length; j++) {
-                if (itens[i] != null && itens[j] != null && itens[i].getId() < itens[j].getId()) {
-                    Carro temp = itens[i];
-                    itens[i] = itens[j];
-                    itens[j] = temp;
-                }
-            }
+            return super.pesquisar(modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e;
         }
     }
 
-    public Carro[] getItens() {
-        return itens;
+    @Override
+    public boolean atualizar(int posicao, Model modelo) {
+        try {
+            if (!(modelo instanceof Carro)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser atualizados.");
+            }
+            return super.atualizar(posicao, modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e;
+        }
     }
 }

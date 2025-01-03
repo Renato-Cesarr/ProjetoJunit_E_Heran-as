@@ -2,7 +2,6 @@ package tarefa4;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class MyList<T> implements Iterable<T> {
 
@@ -180,7 +179,7 @@ public class MyList<T> implements Iterable<T> {
         }
         return changed;
     }
-
+ 
     public boolean contains(Object value) {
         Node<T> current = head;
         while (current != null) {

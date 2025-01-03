@@ -1,147 +1,138 @@
 package tarefa_2_e_3_Testes;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import tarefa2.MeusArrays.PessoaArray;
+import tarefa2.model.Bicicleta;
+import tarefa2.model.Carro;
 import tarefa2.model.Pessoa;
 
 class PessoaArrayTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(PessoaArrayTest.class);
     private PessoaArray pessoaArray;
-    private Pessoa pessoa;
-    private Pessoa pessoaAtualizada;
-    private Pessoa pessoaFalsa;
-    private Pessoa pessoaMaria;
-    private Pessoa pessoaJose;
+    private static final Pessoa PESSOA_1 = (Pessoa) EnumArrayMetodosTest.PESSOA_1.getModel();
+    private static final Pessoa PESSOA_2 = (Pessoa) EnumArrayMetodosTest.PESSOA_2.getModel();
+    private static final Carro CARRO_1 = (Carro) EnumArrayMetodosTest.CARRO_1.getModel();
+    private static final Bicicleta BICICLETA_1 = (Bicicleta) EnumArrayMetodosTest.BICICLETA_1.getModel();
+    private static final int POSICAO_VALIDA = 0;
+    private static final int POSICAO_INVALIDA = 5;
 
     @BeforeEach
-    void configurar() {
+    void setUp() {
         pessoaArray = new PessoaArray(5);
-        pessoa = new Pessoa(1, "João");
-        pessoaAtualizada = new Pessoa(1, "Carlos");
-        pessoaFalsa = new Pessoa(10, "Ana");
-        pessoaMaria = new Pessoa(2, "Maria");
-        pessoaJose = new Pessoa(3, "José");
     }
 
     @Test
-    void deveInserirPessoa() {
-            assertTrue(pessoaArray.inserir(0, pessoa));
-            assertNotNull(pessoaArray.getItens()[0]);
+    void testInserirPessoa() {
+        assertTrue(pessoaArray.inserir(POSICAO_VALIDA, PESSOA_1));
+        assertNotNull(pessoaArray.getItens()[POSICAO_VALIDA]);
+        assertEquals(PESSOA_1, pessoaArray.getItens()[POSICAO_VALIDA]);
     }
 
     @Test
-    void deveRemoverPessoa() {
-            pessoaArray.inserir(0, pessoa);
-            assertTrue(pessoaArray.pesquisar(pessoa));
-            assertTrue(pessoaArray.remover(pessoa));
-            assertNull(pessoaArray.getItens()[0]);
-            assertFalse(pessoaArray.pesquisar(pessoa));
+    void testInserirCarro_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.inserir(POSICAO_VALIDA, CARRO_1);
+        });
     }
 
     @Test
-    void naoDeveRemoverObjetoNaoEncontrado() {
-            assertFalse(pessoaArray.remover(pessoa));
-
+    void testInserirBicicleta_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.inserir(POSICAO_VALIDA, BICICLETA_1);
+        });
     }
 
     @Test
-    void deveRetornarVerdadeiroQuandoModeloEstiverPresente() {
-            pessoaArray.inserir(0, pessoa);
-            assertTrue(pessoaArray.pesquisar(pessoa));
-
+    void testInserirPosicaoInvalida_FalhaArrayIndexOutOfBoundsException() {
+        assertFalse(pessoaArray.inserir(POSICAO_INVALIDA, PESSOA_1));
     }
 
     @Test
-    void deveRetornarFalsoQuandoModeloNaoEstiverPresente() {
-            assertFalse(pessoaArray.pesquisar(pessoa));
+    void testRemoverPessoa() {
+        pessoaArray.inserir(POSICAO_VALIDA, PESSOA_1);
+        assertTrue(pessoaArray.remover(PESSOA_1));
+        assertNull(pessoaArray.getItens()[POSICAO_VALIDA]);
     }
 
     @Test
-    void deveAtualizarPessoa() {
-            pessoaArray.inserir(0, pessoa);
-            assertTrue(pessoaArray.atualizar(0, pessoaAtualizada));
-            assertNotEquals(pessoa, pessoaArray.getItens()[0]);
+    void testRemoverCarro_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.remover(CARRO_1);
+        });
     }
 
     @Test
-    void naoDeveAtualizarModeloNaoEncontrado() {
-            assertFalse(pessoaArray.atualizar(0, pessoaFalsa));
-
+    void testRemoverBicicleta_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.remover(BICICLETA_1);
+        });
     }
 
     @Test
-    void naoDeveAtualizarTipoDeModeloIncorreto() {
-            assertFalse(pessoaArray.atualizar(0, new Pessoa(2, "Roberta")));
+    void testPesquisarPessoa() {
+        pessoaArray.inserir(POSICAO_VALIDA, PESSOA_1);
+        assertTrue(pessoaArray.pesquisar(PESSOA_1));
     }
 
     @Test
-    void deveOrdenarPorIdCrescente() {
-            pessoaArray.inserir(0, pessoa);
-            pessoaArray.inserir(1, pessoaMaria);
-            pessoaArray.inserir(2, pessoaJose);
-
-            pessoaArray.ordenarPorIdCrescente();
-
-            assertEquals(1, pessoaArray.getItens()[0].getId());
-            assertEquals(2, pessoaArray.getItens()[1].getId());
-            assertEquals(3, pessoaArray.getItens()[2].getId());
-
+    void testPesquisarCarro_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.pesquisar(CARRO_1);
+        });
     }
 
     @Test
-    void deveOrdenarPorIdDecrescente() {
-            pessoaArray.inserir(0, pessoa);
-            pessoaArray.inserir(1, pessoaMaria);
-            pessoaArray.inserir(2, pessoaJose);
-
-            pessoaArray.ordenarPorIdDecrescente();
-
-            assertEquals(3, pessoaArray.getItens()[0].getId());
-            assertEquals(2, pessoaArray.getItens()[1].getId());
-            assertEquals(1, pessoaArray.getItens()[2].getId());
-
+    void testPesquisarBicicleta_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.pesquisar(BICICLETA_1);
+        });
     }
+
     @Test
-    void testOrdenarPorIdCrescenteComNulos() {
-        Pessoa pessoa1 = new Pessoa(2, "Pessoa 2");
-        Pessoa pessoa2 = new Pessoa(1, "Pessoa 1");
-
-        PessoaArray pessoaArray = new PessoaArray(3);
-        pessoaArray.inserir(0, pessoa1);
-        pessoaArray.inserir(1, null);
-        pessoaArray.inserir(2, pessoa2);
-
-        pessoaArray.ordenarPorIdCrescente();
-
-        Pessoa[] itens = pessoaArray.getItens();
-        assertEquals(pessoa2, itens[0]);
+    void testAtualizarPessoa() {
+        pessoaArray.inserir(POSICAO_VALIDA, PESSOA_1);
+        assertTrue(pessoaArray.atualizar(POSICAO_VALIDA, PESSOA_2));
+        assertEquals(PESSOA_2, pessoaArray.getItens()[POSICAO_VALIDA]);
     }
-    
+
+    @Test
+    void testAtualizarCarro_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.atualizar(POSICAO_VALIDA, CARRO_1);
+        });
+    }
+
+    @Test
+    void testAtualizarBicicleta_FalhaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            pessoaArray.atualizar(POSICAO_VALIDA, BICICLETA_1);
+        });
+    }
+
     @Test
     void testOrdenarPorIdCrescente() {
-        Pessoa pessoa1 = new Pessoa(3, "Pessoa 3");
-        Pessoa pessoa2 = new Pessoa(1, "Pessoa 1");
-        Pessoa pessoa3 = new Pessoa(2, "Pessoa 2");
-
-        PessoaArray pessoaArray = new PessoaArray(3);
-        pessoaArray.inserir(0, pessoa1);
-        pessoaArray.inserir(1, pessoa2);
-        pessoaArray.inserir(2, pessoa3);
-
+        pessoaArray.inserir(0, PESSOA_2);
+        pessoaArray.inserir(1, PESSOA_1);
         pessoaArray.ordenarPorIdCrescente();
-
-        Pessoa[] itens = pessoaArray.getItens();
-        assertEquals(pessoa2, itens[0]);
-        assertEquals(pessoa3, itens[1]);
-        assertEquals(pessoa1, itens[2]);
+        assertEquals(PESSOA_1, pessoaArray.getItens()[0]);
+        assertEquals(PESSOA_2, pessoaArray.getItens()[1]);
     }
 
-
+    @Test
+    void testOrdenarPorIdDecrescente() {
+        pessoaArray.inserir(0, PESSOA_1);
+        pessoaArray.inserir(1, PESSOA_2);
+        pessoaArray.ordenarPorIdDecrescente();
+        assertEquals(PESSOA_2, pessoaArray.getItens()[0]);
+        assertEquals(PESSOA_1, pessoaArray.getItens()[1]);
+    }
 }

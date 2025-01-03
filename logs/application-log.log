@@ -1,0 +1,61 @@
+2025-01-02 10:45:09.148 [main] INFO  tarefa_1_Testes.ArrayTest - Teste 'testarArrayVazio' passou com sucesso!
+2025-01-02 10:45:09.159 [main] INFO  tarefa_1_Testes.ArrayTest - Teste 'testarArrayBidimensional' passou com sucesso!
+2025-01-02 10:45:09.161 [main] INFO  tarefa_1_Testes.ArrayTest - Teste 'testarArrayUnidimensionalComNumeros' passou com sucesso!
+2025-01-02 10:45:09.163 [main] INFO  tarefa_1_Testes.ArrayTest - Teste 'testarArrayUnidimensionalComLetras' passou com sucesso!
+2025-01-02 10:45:09.165 [main] INFO  tarefa_1_Testes.ArrayTest - Teste 'testarRedimensionamentoArray' passou com sucesso!
+2025-01-03 00:41:28.780 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 00:41:28.782 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 00:41:28.798 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 00:41:28.799 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 00:41:47.710 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 00:41:47.712 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 00:41:47.737 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 00:41:47.737 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 01:46:25.634 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 01:46:25.636 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 01:46:25.639 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 01:46:25.639 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 01:48:19.510 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 01:48:19.511 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 01:48:19.514 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 01:48:19.514 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 01:52:59.916 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 01:52:59.917 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 01:52:59.919 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 01:52:59.919 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:08:34.219 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:08:34.220 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:08:34.222 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:08:34.223 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:09:30.820 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:09:30.821 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:09:30.823 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:09:30.824 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:10:23.334 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:10:23.336 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:10:23.339 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:10:23.340 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:12:44.189 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:12:44.190 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:12:44.193 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:12:44.193 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:13:48.177 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:13:48.178 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:13:48.180 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:13:48.180 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:14:07.568 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:14:07.569 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:14:07.571 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:14:07.571 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:20:05.720 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero. (criarArrayBidimensional:122025-01-03 02:20:05.722 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero. (criarArrayBidimensional:122025-01-03 02:20:05.724 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula. (inserirValor:202025-01-03 02:20:05.725 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula. (acessarValor:322025-01-03 02:21:46.623 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero. (criarArrayBidimensional:122025-01-03 02:21:46.625 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero. (criarArrayBidimensional:122025-01-03 02:21:46.628 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula. (inserirValor:202025-01-03 02:21:46.628 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula. (acessarValor:322025-01-03 02:22:22.442 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero. (criarArrayBidimensional:122025-01-03 02:22:22.445 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero. (criarArrayBidimensional:122025-01-03 02:22:22.447 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula. (inserirValor:202025-01-03 02:22:22.448 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula. (acessarValor:322025-01-03 02:23:35.949 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:23:35.951 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:23:35.953 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:23:35.954 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:26:36.227 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:26:36.228 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:26:36.230 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:26:36.230 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.
+2025-01-03 02:27:27.883 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:27:27.884 [main] ERROR tarefa1.ArraySimulador - Falha ao criar array: As dimensões do array devem ser maiores que zero.
+2025-01-03 02:27:27.887 [main] ERROR tarefa1.ArraySimulador - Falha ao inserir valor: A matriz não pode ser nula.
+2025-01-03 02:27:27.887 [main] ERROR tarefa1.ArraySimulador - Falha ao acessar valor: A matriz não pode ser nula.

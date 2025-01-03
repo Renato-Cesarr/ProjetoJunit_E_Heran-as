@@ -18,7 +18,7 @@ public class ArrayMetodos {
     public Model[] getItens() {
         return itens;
     }
-
+ 
     public boolean inserir(int posicao, Model modelo) {
         if (posicao >= 0 && posicao < itens.length && modelo != null) {
             if (modelo instanceof Pessoa || modelo instanceof Bicicleta || modelo instanceof Carro) {
