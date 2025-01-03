@@ -1,76 +1,68 @@
 package tarefa2.MeusArrays;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tarefa2.model.Model;
 import tarefa2.model.Pessoa;
+import tarefa3.ArrayMetodos;
 
-public class PessoaArray {
+public class PessoaArray extends ArrayMetodos {
+    private static final Logger LOGGER = Logger.getLogger(PessoaArray.class.getName());
 
-    private Pessoa[] itens;
-    private int tamanho;
-
-    public PessoaArray(int capacidade) {
-        itens = new Pessoa[capacidade];
-        tamanho = 0;
-    }
- 
-    public boolean inserir(int posicao, Pessoa pessoa) {
-        itens[posicao] = pessoa;
-        tamanho++;
-        return true;
+    public PessoaArray(int tamanho) {
+        super(tamanho);
     }
 
-    public boolean remover(Pessoa pessoa) {
-        for (int i = 0; i < itens.length; i++) {
-            if (itens[i] != null && itens[i].equals(pessoa)) {
-                itens[i] = null;
-                tamanho--;
-                return true;
+    @Override
+    public boolean inserir(int posicao, Model modelo) {
+        try {
+            if (!(modelo instanceof Pessoa)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Pessoa podem ser adicionados.");
             }
+            return super.inserir(posicao, modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e; 
         }
-        return false;
-    }
+    } 
 
-    public boolean pesquisar(Pessoa pessoa) {
-        for (Pessoa p : itens) {
-            if (p != null && p.equals(pessoa)) {
-                return true;
+    @Override
+    public boolean remover(Model modelo) {
+        try {
+            if (!(modelo instanceof Pessoa)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Pessoa podem ser removidos.");
             }
+            return super.remover(modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e;
         }
-        return false;
     }
 
-    public boolean atualizar(int posicao, Pessoa pessoa) {
-        if (posicao < 0 || posicao >= itens.length || pessoa == null || itens[posicao] == null) {
-            return false;
-        }
-        itens[posicao] = pessoa;
-        return true;
-    }
-
-    public void ordenarPorIdCrescente() {
-        for (int i = 0; i < itens.length - 1; i++) {
-            for (int j = i + 1; j < itens.length; j++) {
-                if (itens[i] != null && itens[j] != null && itens[i].getId() > itens[j].getId()) {
-                    Pessoa temp = itens[i];
-                    itens[i] = itens[j];
-                    itens[j] = temp;
-                }
+    @Override
+    public boolean pesquisar(Model modelo) {
+        try {
+            if (!(modelo instanceof Pessoa)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Pessoa podem ser pesquisados.");
             }
+            return super.pesquisar(modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e;
         }
     }
 
-    public void ordenarPorIdDecrescente() {
-        for (int i = 0; i < itens.length - 1; i++) {
-            for (int j = i + 1; j < itens.length; j++) {
-                if (itens[i] != null && itens[j] != null && itens[i].getId() < itens[j].getId()) {
-                    Pessoa temp = itens[i];
-                    itens[i] = itens[j];
-                    itens[j] = temp;
-                }
+    @Override
+    public boolean atualizar(int posicao, Model modelo) {
+        try {
+            if (!(modelo instanceof Pessoa)) {
+                throw new IllegalArgumentException("Somente objetos do tipo Pessoa podem ser atualizados.");
             }
+            return super.atualizar(posicao, modelo);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            throw e;
         }
-    }
-
-    public Pessoa[] getItens() {
-        return itens;
     }
 }

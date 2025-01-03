@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+    <!-- Appender para saída no console -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!-- Padrão de exibição de log com quebra de linha -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%throwable</pattern>
         </encoder>
     </appender>
 
+    <!-- Appender para log em arquivo -->
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/application-log.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%throwable</pattern>
         </encoder>
     </appender>
 
+    <!-- Appender para arquivo de log com rotação diária -->
     <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/application-log-%d{yyyy-MM-dd}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/application-log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <maxHistory>30</maxHistory> 
-            <totalSizeCap>1GB</totalSizeCap> 
+            <maxHistory>30</maxHistory> <!-- Mantém logs dos últimos 30 dias -->
+            <totalSizeCap>1GB</totalSizeCap> <!-- Limite de tamanho total dos logs -->
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%throwable</pattern>
         </encoder>
     </appender>
 
-    <logger name="com.example" level="debug">
+    <!-- Logger específico para a classe tarefa2.MeusArrays -->
+    <logger name="tarefa2.MeusArrays" level="debug">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
+        <appender-ref ref="ROLLING_FILE"/>
     </logger>
 
-    <logger name="com.example.errors" level="error">
+    <!-- Logger específico para erros em tarefa2.errors -->
+    <logger name="tarefa2.errors" level="error">
         <appender-ref ref="FILE"/>
     </logger>
 
+    <!-- Logger raiz para nível de log padrão -->
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
