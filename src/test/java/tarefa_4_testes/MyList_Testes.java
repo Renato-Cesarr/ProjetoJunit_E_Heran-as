@@ -5,14 +5,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tarefa4.MyList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tarefa_quadro.MyList;
 
 class MyListTest {
 
     private MyList<Integer> list;
-    private static final Logger logger = LoggerFactory.getLogger(MyListTest.class);
+    
 
     @BeforeEach
     void setUp() {

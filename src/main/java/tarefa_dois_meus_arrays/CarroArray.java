@@ -1,11 +1,12 @@
-package tarefa2.MeusArrays;
+package tarefa_dois_meus_arrays;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import tarefa2.model.Carro;
-import tarefa2.model.Model;
-import tarefa3.ArrayMetodos;
+import tarefa_dois_model.Carro;
+import tarefa_dois_model.Model;
+import tarefa_dois_model.ModelException;
+import tarefa_tres.ArrayMetodos;
 
 public class CarroArray extends ArrayMetodos {
     private static final Logger LOGGER = Logger.getLogger(CarroArray.class.getName());
@@ -18,12 +19,12 @@ public class CarroArray extends ArrayMetodos {
     public boolean inserir(int posicao, Model modelo) {
         try {
             if (!(modelo instanceof Carro)) {
-                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser adicionados.");
+                throw new ModelException("Somente objetos do tipo Carro podem ser adicionados.");
             }
             return super.inserir(posicao, modelo);
-        } catch (IllegalArgumentException e) {
+        } catch (ModelException e) {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
-            throw e;
+            throw new RuntimeException("Erro ao inserir carro.", e);
         }
     }
 
@@ -31,12 +32,12 @@ public class CarroArray extends ArrayMetodos {
     public boolean remover(Model modelo) {
         try {
             if (!(modelo instanceof Carro)) {
-                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser removidos.");
+                throw new ModelException("Somente objetos do tipo Carro podem ser removidos.");
             }
             return super.remover(modelo);
-        } catch (IllegalArgumentException e) {
+        } catch (ModelException e) {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
-            throw e;
+            throw new RuntimeException("Erro ao remover carro.", e);
         }
     }
 
@@ -44,12 +45,12 @@ public class CarroArray extends ArrayMetodos {
     public boolean pesquisar(Model modelo) {
         try {
             if (!(modelo instanceof Carro)) {
-                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser pesquisados.");
+                throw new ModelException("Somente objetos do tipo Carro podem ser pesquisados.");
             }
             return super.pesquisar(modelo);
-        } catch (IllegalArgumentException e) {
+        } catch (ModelException e) {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
-            throw e;
+            throw new RuntimeException("Erro ao pesquisar carro.", e);
         }
     }
 
@@ -57,12 +58,12 @@ public class CarroArray extends ArrayMetodos {
     public boolean atualizar(int posicao, Model modelo) {
         try {
             if (!(modelo instanceof Carro)) {
-                throw new IllegalArgumentException("Somente objetos do tipo Carro podem ser atualizados.");
+                throw new ModelException("Somente objetos do tipo Carro podem ser atualizados.");
             }
             return super.atualizar(posicao, modelo);
-        } catch (IllegalArgumentException e) {
+        } catch (ModelException e) {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
-            throw e;
+            throw new RuntimeException("Erro ao atualizar carro.", e);
         }
     }
 }

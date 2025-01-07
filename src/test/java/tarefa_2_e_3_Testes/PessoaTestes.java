@@ -1,22 +1,15 @@
 package tarefa_2_e_3_Testes;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import tarefa2.MeusArrays.PessoaArray;
-import tarefa2.model.Bicicleta;
-import tarefa2.model.Carro;
-import tarefa2.model.Pessoa;
+import tarefa_dois_meus_arrays.PessoaArray;
+import tarefa_dois_model.Bicicleta;
+import tarefa_dois_model.Carro;
+import tarefa_dois_model.Pessoa;
 
 class PessoaArrayTest {
-
     private PessoaArray pessoaArray;
     private static final Pessoa PESSOA_1 = (Pessoa) EnumArrayMetodosTest.PESSOA_1.getModel();
     private static final Pessoa PESSOA_2 = (Pessoa) EnumArrayMetodosTest.PESSOA_2.getModel();
@@ -38,21 +31,17 @@ class PessoaArrayTest {
     }
 
     @Test
-    void testInserirCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.inserir(POSICAO_VALIDA, CARRO_1);
-        });
+    void testInserirCarro() {
+        assertFalse(pessoaArray.inserir(POSICAO_VALIDA, CARRO_1));
     }
 
     @Test
-    void testInserirBicicleta_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.inserir(POSICAO_VALIDA, BICICLETA_1);
-        });
+    void testInserirBicicleta() {
+        assertFalse(pessoaArray.inserir(POSICAO_VALIDA, BICICLETA_1));
     }
 
     @Test
-    void testInserirPosicaoInvalida_FalhaArrayIndexOutOfBoundsException() {
+    void testInserirPosicaoInvalida() {
         assertFalse(pessoaArray.inserir(POSICAO_INVALIDA, PESSOA_1));
     }
 
@@ -64,17 +53,13 @@ class PessoaArrayTest {
     }
 
     @Test
-    void testRemoverCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.remover(CARRO_1);
-        });
+    void testRemoverCarro() {
+        assertFalse(pessoaArray.remover(CARRO_1));
     }
 
     @Test
-    void testRemoverBicicleta_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.remover(BICICLETA_1);
-        });
+    void testRemoverBicicleta() {
+        assertFalse(pessoaArray.remover(BICICLETA_1));
     }
 
     @Test
@@ -84,17 +69,13 @@ class PessoaArrayTest {
     }
 
     @Test
-    void testPesquisarCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.pesquisar(CARRO_1);
-        });
+    void testPesquisarCarro() {
+        assertFalse(pessoaArray.pesquisar(CARRO_1));
     }
 
     @Test
-    void testPesquisarBicicleta_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.pesquisar(BICICLETA_1);
-        });
+    void testPesquisarBicicleta() {
+        assertFalse(pessoaArray.pesquisar(BICICLETA_1));
     }
 
     @Test
@@ -105,17 +86,13 @@ class PessoaArrayTest {
     }
 
     @Test
-    void testAtualizarCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.atualizar(POSICAO_VALIDA, CARRO_1);
-        });
+    void testAtualizarCarro() {
+        assertFalse(pessoaArray.atualizar(POSICAO_VALIDA, CARRO_1));
     }
 
     @Test
-    void testAtualizarBicicleta_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            pessoaArray.atualizar(POSICAO_VALIDA, BICICLETA_1);
-        });
+    void testAtualizarBicicleta() {
+        assertFalse(pessoaArray.atualizar(POSICAO_VALIDA, BICICLETA_1));
     }
 
     @Test
@@ -134,5 +111,29 @@ class PessoaArrayTest {
         pessoaArray.ordenarPorIdDecrescente();
         assertEquals(PESSOA_2, pessoaArray.getItens()[0]);
         assertEquals(PESSOA_1, pessoaArray.getItens()[1]);
+    }
+
+    @Test
+    void testGetSetNome() {
+        PESSOA_1.setNome("João");
+        assertEquals("João", PESSOA_1.getNome());
+        PESSOA_1.setNome("Maria");
+        assertEquals("Maria", PESSOA_1.getNome());
+    }
+
+    @Test
+    void testGetSetIdade() {
+        PESSOA_1.setIdade(25);
+        assertEquals(25, PESSOA_1.getIdade());
+        PESSOA_1.setIdade(30);
+        assertEquals(30, PESSOA_1.getIdade());
+    }
+
+    @Test
+    void testGetSetEndereco() {
+        PESSOA_1.setEndereco("Rua A, 123");
+        assertEquals("Rua A, 123", PESSOA_1.getEndereco());
+        PESSOA_1.setEndereco("Rua B, 456");
+        assertEquals("Rua B, 456", PESSOA_1.getEndereco());
     }
 }

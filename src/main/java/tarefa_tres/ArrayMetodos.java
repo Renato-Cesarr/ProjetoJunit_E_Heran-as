@@ -1,11 +1,11 @@
-package tarefa3;
+package tarefa_tres;
 
 import java.util.Arrays;
 
-import tarefa2.model.Bicicleta;
-import tarefa2.model.Carro;
-import tarefa2.model.Model;
-import tarefa2.model.Pessoa;
+import tarefa_dois_model.Bicicleta;
+import tarefa_dois_model.Carro;
+import tarefa_dois_model.Model;
+import tarefa_dois_model.Pessoa;
 
 public class ArrayMetodos {
 

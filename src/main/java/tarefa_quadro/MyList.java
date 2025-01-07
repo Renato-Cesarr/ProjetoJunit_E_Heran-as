@@ -1,4 +1,4 @@
-package tarefa4;
+package tarefa_quadro;
 
 import java.util.Collection;
 import java.util.Iterator;

@@ -3,17 +3,15 @@ package tarefa_2_e_3_Testes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import tarefa2.MeusArrays.BicicletaArray;
-import tarefa2.model.Bicicleta;
-import tarefa2.model.Carro;
-import tarefa2.model.Pessoa;
+import tarefa_dois_meus_arrays.BicicletaArray;
+import tarefa_dois_model.Bicicleta;
+import tarefa_dois_model.Carro;
+import tarefa_dois_model.Pessoa;
 
 class BicicletaArrayTest {
 
@@ -38,43 +36,30 @@ class BicicletaArrayTest {
     }
 
     @Test
-    void testInserirCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.inserir(POSICAO_VALIDA, CARRO_1);
-        });
-    }
-
-    @Test
-    void testInserirPessoa_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.inserir(POSICAO_VALIDA, PESSOA_1);
-        });
-    }
-
-    @Test
-    void testInserirPosicaoInvalida_FalhaArrayIndexOutOfBoundsException() {
+    void testInserirPosicaoInvalida() {
         assertFalse(bicicletaArray.inserir(POSICAO_INVALIDA, BICICLETA_1));
+    }
+
+    @Test
+    void testInserirCarro() {
+        assertFalse(bicicletaArray.inserir(POSICAO_VALIDA, CARRO_1));
+    }
+
+    @Test
+    void testInserirPessoa() {
+        assertFalse(bicicletaArray.inserir(POSICAO_VALIDA, PESSOA_1));
     }
 
     @Test
     void testRemoverBicicleta() {
         bicicletaArray.inserir(POSICAO_VALIDA, BICICLETA_1);
         assertTrue(bicicletaArray.remover(BICICLETA_1));
-        assertNull(bicicletaArray.getItens()[POSICAO_VALIDA]);
+        assertFalse(bicicletaArray.pesquisar(BICICLETA_1));
     }
 
     @Test
-    void testRemoverCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.remover(CARRO_1);
-        });
-    }
-
-    @Test
-    void testRemoverPessoa_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.remover(PESSOA_1);
-        });
+    void testRemoverCarro() {
+        assertFalse(bicicletaArray.remover(CARRO_1));
     }
 
     @Test
@@ -84,17 +69,13 @@ class BicicletaArrayTest {
     }
 
     @Test
-    void testPesquisarCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.pesquisar(CARRO_1);
-        });
+    void testPesquisarCarro() {
+        assertFalse(bicicletaArray.pesquisar(CARRO_1));
     }
 
     @Test
-    void testPesquisarPessoa_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.pesquisar(PESSOA_1);
-        });
+    void testPesquisarPessoa() {
+        assertFalse(bicicletaArray.pesquisar(PESSOA_1));
     }
 
     @Test
@@ -105,17 +86,13 @@ class BicicletaArrayTest {
     }
 
     @Test
-    void testAtualizarCarro_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.atualizar(POSICAO_VALIDA, CARRO_1);
-        });
+    void testAtualizarCarro() {
+        assertFalse(bicicletaArray.atualizar(POSICAO_VALIDA, CARRO_1));
     }
 
     @Test
-    void testAtualizarPessoa_FalhaIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            bicicletaArray.atualizar(POSICAO_VALIDA, PESSOA_1);
-        });
+    void testAtualizarPessoa() {
+        assertFalse(bicicletaArray.atualizar(POSICAO_VALIDA, PESSOA_1));
     }
 
     @Test
@@ -134,5 +111,29 @@ class BicicletaArrayTest {
         bicicletaArray.ordenarPorIdDecrescente();
         assertEquals(BICICLETA_2, bicicletaArray.getItens()[0]);
         assertEquals(BICICLETA_1, bicicletaArray.getItens()[1]);
+    }
+    
+    @Test
+    void testGetSetCor() {
+        Bicicleta bicicleta = new Bicicleta(1, "Bicicleta de teste", 500.0, "Vermelha", 21, "Disco");
+        assertEquals("Vermelha", bicicleta.getCor());
+        bicicleta.setCor("Azul");
+        assertEquals("Azul", bicicleta.getCor());
+    }
+
+    @Test
+    void testGetSetMarchas() {
+        Bicicleta bicicleta = new Bicicleta(1, "Bicicleta de teste", 500.0, "Vermelha", 21, "Disco");
+        assertEquals(21, bicicleta.getMarchas());
+        bicicleta.setMarchas(18);
+        assertEquals(18, bicicleta.getMarchas());
+    }
+
+    @Test
+    void testGetSetTipoFreio() {
+        Bicicleta bicicleta = new Bicicleta(1, "Bicicleta de teste", 500.0, "Vermelha", 21, "Disco");
+        assertEquals("Disco", bicicleta.getTipoFreio());
+        bicicleta.setTipoFreio("V-brake");
+        assertEquals("V-brake", bicicleta.getTipoFreio());
     }
 }
