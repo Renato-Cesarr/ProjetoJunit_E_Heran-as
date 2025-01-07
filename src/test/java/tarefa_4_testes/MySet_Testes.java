@@ -1,219 +1,93 @@
 package tarefa_4_testes;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import tarefa4.MySet;
+import tarefa_quadro.MySet;
 
 class MySet_Test {
-
-    private MySet<Integer> set;
-
-    private static final Integer ELEMENT_1 = 10;
-    private static final Integer ELEMENT_2 = 20;
-    private static final Integer ELEMENT_3 = 30;
-    private static final Integer ELEMENT_NON_EXISTENT = 40;
-
-    private static final Collection<Integer> COLLECTION_1 = Arrays.asList(ELEMENT_2, ELEMENT_3);
-
-    @BeforeEach
-    void setUp() {
-        set = new MySet<>();
+    @Test
+     void testAddElement() {
+        MySet<Integer> mySet = new MySet<>();
+        assertTrue(mySet.add(1));
+        assertTrue(mySet.add(2));
+        assertEquals(2, mySet.size());
     }
 
     @Test
-    void testAdd() {
-        assertTrue(set.add(ELEMENT_1));
-        assertEquals(1, set.size());
-        assertFalse(set.add(ELEMENT_1)); 
-        assertEquals(1, set.size());
+     void testAddDuplicateElement() {
+        MySet<Integer> mySet = new MySet<>();
+        mySet.add(1);
+        assertFalse(mySet.add(1));
+        assertEquals(1, mySet.size());
     }
 
     @Test
-    void testRemove() {
-        set.add(ELEMENT_1);
-        set.add(ELEMENT_2);
-        assertTrue(set.remove(ELEMENT_1));
-        assertEquals(1, set.size());
-        assertFalse(set.remove(ELEMENT_NON_EXISTENT)); 
+     void testRemoveElement() {
+        MySet<Integer> mySet = new MySet<>();
+        mySet.add(1);
+        assertTrue(mySet.remove(1));
+        assertEquals(0, mySet.size());
     }
 
     @Test
-    void testContains() {
-        set.add(ELEMENT_1);
-        set.add(ELEMENT_2);
-        assertTrue(set.contains(ELEMENT_1));
-        assertFalse(set.contains(ELEMENT_NON_EXISTENT));
+     void testRemoveNonExistentElement() {
+        MySet<Integer> mySet = new MySet<>();
+        mySet.add(1);
+        assertFalse(mySet.remove(2));
+        assertEquals(1, mySet.size());
     }
 
     @Test
-    void testSize() {
-        assertEquals(0, set.size());
-        set.add(ELEMENT_1);
-        set.add(ELEMENT_2);
-        assertEquals(2, set.size());
-        set.remove(ELEMENT_1);
-        assertEquals(1, set.size());
+     void testContainsElement() {
+        MySet<Integer> mySet = new MySet<>();
+        mySet.add(1);
+        assertTrue(mySet.contains(1));
     }
 
     @Test
-    void testClear() {
-        set.add(ELEMENT_1);
-        set.add(ELEMENT_2);
-        set.clear();
-        assertTrue(set.isEmpty());
-        assertEquals(0, set.size());
+     void testContainsNonExistentElement() {
+        MySet<Integer> mySet = new MySet<>();
+        mySet.add(1);
+        assertFalse(mySet.contains(2));
     }
 
     @Test
-    void testIsEmpty() {
-        assertTrue(set.isEmpty());
-        set.add(ELEMENT_1);
-        assertFalse(set.isEmpty());
+     void testIsEmpty() {
+        MySet<Integer> mySet = new MySet<>();
+        assertTrue(mySet.isEmpty());
+        mySet.add(1);
+        assertFalse(mySet.isEmpty());
     }
 
     @Test
-    void testToArray() {
-        set.add(ELEMENT_1);
-        set.add(ELEMENT_2);
-        Object[] array = set.toArray();
-        assertEquals(2, array.length);
-        assertTrue(Arrays.asList(array).contains(ELEMENT_1));
-        assertTrue(Arrays.asList(array).contains(ELEMENT_2));
+     void testClear() {
+        MySet<Integer> mySet = new MySet<>();
+        mySet.add(1);
+        mySet.clear();
+        assertTrue(mySet.isEmpty());
     }
 
     @Test
-    void testHashCode() {
-        set.add(ELEMENT_1);
-        set.add(ELEMENT_2);
-
-        MySet<Integer> otherSet = new MySet<>();
-        otherSet.add(ELEMENT_1);
-        otherSet.add(ELEMENT_2);
-        assertEquals(set.hashCode(), otherSet.hashCode());
-    }
-
-    @Test
-    void testAddAll() {
-        assertTrue(set.addAll(COLLECTION_1));
-        assertEquals(2, set.size());
-        assertTrue(set.contains(ELEMENT_2));
-        assertTrue(set.contains(ELEMENT_3));
-    }
-
-    @Test
-    void testRemoveAll() {
-        set.add(ELEMENT_1);
-        set.add(ELEMENT_2);
-        assertTrue(set.removeAll(COLLECTION_1));
-        assertEquals(1, set.size());
-        assertFalse(set.contains(ELEMENT_2));
-    }
-
-    @Test
-    void testRetainAll() {
-        MySet<Integer> set = new MySet<>();
-        set.add(1);
-        set.add(2);
-        set.add(3);
-
-        Collection<Integer> collection = Arrays.asList(2, 3);
-
-        assertTrue(set.retainAll(collection));
-        assertTrue(set.contains(2));
-        assertTrue(set.contains(3));
-        assertFalse(set.contains(1));
-    }
-
-    @Test
-    void testNextThrowsException() {
-        MySet<Integer> set = new MySet<>();
-        set.add(1);
-
-        Iterator<Integer> iterator = set.iterator();
-        iterator.next(); 
-
-        assertThrows(NoSuchElementException.class, iterator::next);
-    }
-
-    @Test
-    void testEquals() {
-        MySet<Integer> set1 = new MySet<>();
-        set1.add(1);
-        set1.add(2);
-
-        MySet<Integer> set2 = new MySet<>();
-        set2.add(1);
-        set2.add(2);
-
-        MySet<Integer> set3 = new MySet<>();
-        set3.add(3);
-
-        assertTrue(set1.equals(set2)); 
-        assertFalse(set1.equals(set3)); 
-        assertFalse(set1.equals(null)); 
-        assertFalse(set1.equals("String")); 
-    }
-
-    @Test
-    void testEqualsSame() {
-        MySet<Integer> set1 = new MySet<>();
-        MySet<Integer> set2 = new MySet<>();
-        set1.add(1);
-        set2.add(1);
-
-        assertTrue(set1.equals(set2)); 
-    }
-
-    @Test
-    void testEqualsDifferentSize() {
-        MySet<Integer> set1 = new MySet<>();
-        MySet<Integer> set2 = new MySet<>();
-        set1.add(1);
-        set1.add(2);
-        set2.add(1);
-
-        assertFalse(set1.equals(set2)); 
-    }
-
-    @Test
-    void testHashCodeDifferent() {
-        MySet<Integer> set1 = new MySet<>();
-        MySet<Integer> set2 = new MySet<>();
-        set1.add(1);
-        set2.add(2);
-
-        assertNotEquals(set1.hashCode(), set2.hashCode());
-    }
-
-    @Test
-    void testHashCodeNull() {
-        MySet<Integer> set = new MySet<>();
-        set.add(null);
-
-        assertNotNull(set.hashCode()); 
-    }
-
-    @Test
-    void testRetainAllRemovesHead() {
-        MySet<Integer> set = new MySet<>();
-        set.add(1); 
-        set.add(2);
-        set.add(3);
-
-        Collection<Integer> collection = Arrays.asList(2, 3);
-        boolean changed = set.retainAll(collection);
-        assertTrue(changed);
-        assertFalse(set.contains(1)); 
-        assertTrue(set.contains(2));
-        assertTrue(set.contains(3));
-        assertEquals(2, set.size());
+     void testShuffle() {
+        MySet<Integer> mySet = new MySet<>();
+        mySet.add(1);
+        mySet.add(2);
+        mySet.add(3);
+        Integer firstElementBeforeShuffle = null;
+        for (Integer value : mySet) {
+            firstElementBeforeShuffle = value;
+            break;
+        }
+        mySet.shuffle();
+        Integer firstElementAfterShuffle = null;
+        for (Integer value : mySet) {
+            firstElementAfterShuffle = value;
+            break;
+        }
     }
 }

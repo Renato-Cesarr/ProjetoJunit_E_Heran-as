@@ -1,6 +1,7 @@
-package tarefa4;
+package tarefa_quadro;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -25,7 +26,9 @@ public class MySet<T> implements Iterable<T> {
     }
 
     public boolean add(T value) {
-        if (contains(value)) return false;
+        if (contains(value)) {
+            return false;
+        }
         Node<T> newNode = new Node<>(value);
         newNode.next = head;
         head = newNode;
@@ -67,13 +70,31 @@ public class MySet<T> implements Iterable<T> {
         return size;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public void clear() {
         head = null;
         size = 0;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
+    public void shuffle() {
+        if (size <= 1) return;
+        ArrayList<T> list = new ArrayList<>();
+        Node<T> current = head;
+        while (current != null) {
+            list.add(current.value);
+            current = current.next;
+        }
+        Collections.shuffle(list);
+        current = head = new Node<>(list.get(0));
+        for (int i = 1; i < list.size(); i++) {
+            Node<T> newNode = new Node<>(list.get(i));
+            current.next = newNode;
+            current = newNode;
+        }
+        size = list.size();
     }
 
     @Override
@@ -96,74 +117,5 @@ public class MySet<T> implements Iterable<T> {
                 return value;
             }
         };
-    }
-
-    public Object[] toArray() {
-        Object[] array = new Object[size];
-        Node<T> current = head;
-        int index = 0;
-        while (current != null) {
-            array[index++] = current.value;
-            current = current.next;
-        }
-        return array;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        MySet<?> mySet = (MySet<?>) o;
-        if (size != mySet.size) return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 1;
-        for (T element : this) {
-            result = 31 * result + (element == null ? 0 : element.hashCode());
-        }
-        return result;
-    }
-
-    public boolean addAll(Collection<? extends T> c) {
-        boolean changed = false;
-        for (T element : c) {
-            if (add(element)) {
-                changed = true;
-            }
-        }
-        return changed;
-    }
-
-    public boolean removeAll(Collection<?> c) {
-        boolean changed = false;
-        for (Object element : c) {
-            if (remove(element)) {
-                changed = true;
-            }
-        }
-        return changed;
-    }
-
-    public boolean retainAll(Collection<?> c) {
-        boolean changed = false;
-        Node<T> current = head;
-        Node<T> previous = null;
-
-        while (current != null) {
-            if (!c.contains(current.value)) {
-                if (previous == null) {
-                } else {
-                    previous.next = current.next;
-                }
-                size--;
-                changed = true;
-            } else {
-                previous = current;
-            }
-            current = current.next;
-        }
-        return changed;
     }
 }

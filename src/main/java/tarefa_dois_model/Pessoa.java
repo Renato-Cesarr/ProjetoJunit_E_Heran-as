@@ -1,4 +1,4 @@
-package tarefa2.model;
+package tarefa_dois_model;
 
 public class Pessoa extends Model {
     private String nome;

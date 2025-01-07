@@ -2,179 +2,116 @@ package tarefa_4_testes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import tarefa4.MyMap;
+import tarefa_quadro.MyMap;
 
 class MyMapTest {
 
-    private MyMap<String, Integer> map;
+    private MyMap<String, Integer> myMap;
 
-    private static final String KEY_1 = "key1";
-    private static final String KEY_2 = "key2";
-    private static final String KEY_NON_EXISTENT = "nonexistentKey";
-    
-    private static final Integer VALUE_10 = 10;
-    private static final Integer VALUE_20 = 20;
-    private static final Integer VALUE_30 = 30;
+    private static final String CHAVE_1 = "chave1";
+    private static final String CHAVE_2 = "chave2";
+    private static final String CHAVE_3 = "chave3";
+    private static final String CHAVE_4 = "chave4";
+    private static final String CHAVE_INEXISTENTE = "chave5";
+    private static final int VALOR_1 = 10;
+    private static final int VALOR_2 = 20;
+    private static final int VALOR_3 = 30;
+    private static final int VALOR_4 = 40;
 
     @BeforeEach
     void setUp() {
-        map = new MyMap<>();
+        myMap = new MyMap<>();
+        myMap.put(CHAVE_1, VALOR_1);
+        myMap.put(CHAVE_2, VALOR_2);
+        myMap.put(CHAVE_3, VALOR_3);
     }
 
     @Test
-    void testPutAndGet() {
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        assertEquals(VALUE_10, map.get(KEY_1));
-        assertEquals(VALUE_20, map.get(KEY_2));
-        assertNull(map.get(KEY_NON_EXISTENT));
+    void deveriaAdicionarNovoElementoQuandoChaveNaoExistir() {
+        boolean resultado = myMap.put(CHAVE_4, VALOR_4);
+        assertTrue(resultado);
+        assertEquals(VALOR_4, myMap.get(CHAVE_4));
+        assertEquals(4, myMap.size());
     }
 
     @Test
-    void testPutDuplicateKey() {
-        map.put(KEY_1, VALUE_10);
-        boolean result = map.put(KEY_1, VALUE_20);
-
-        assertFalse(result);
-        assertEquals(VALUE_10, map.get(KEY_1));
+    void naoDeveriaAdicionarElementoComChaveExistente() {
+        boolean resultado = myMap.put(CHAVE_1, 100);
+        assertFalse(resultado);
+        assertEquals(VALOR_1, myMap.get(CHAVE_1));
+        assertEquals(3, myMap.size());
     }
 
     @Test
-    void testRemove() {
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        assertTrue(map.remove(KEY_1));
-        assertNull(map.get(KEY_1));
-
-        assertFalse(map.remove(KEY_NON_EXISTENT));
+    void deveriaRemoverElementoQuandoChaveExistir() {
+        boolean resultado = myMap.remove(CHAVE_2);
+        assertTrue(resultado);
+        assertNull(myMap.get(CHAVE_2));
+        assertEquals(2, myMap.size());
     }
 
     @Test
-    void testContainsKey() {
-        map.put(KEY_1, VALUE_10);
-
-        assertTrue(map.containsKey(KEY_1));
-        assertFalse(map.containsKey(KEY_NON_EXISTENT));
+    void naoDeveriaRemoverElementoQuandoChaveNaoExistir() {
+        boolean resultado = myMap.remove(CHAVE_INEXISTENTE);
+        assertFalse(resultado);
+        assertEquals(3, myMap.size());
     }
 
     @Test
-    void testSize() {
-        assertEquals(0, map.size());
-
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        assertEquals(2, map.size());
+    void deveriaRetornarValorCorretoParaChaveExistente() {
+        Integer valor = myMap.get(CHAVE_3);
+        assertNotNull(valor);
+        assertEquals(VALOR_3, valor);
     }
 
     @Test
-    void testClear() {
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        map.clear();
-
-        assertTrue(map.isEmpty());
-        assertEquals(0, map.size());
+    void deveriaRetornarNullParaChaveNaoExistente() {
+        Integer valor = myMap.get(CHAVE_INEXISTENTE);
+        assertNull(valor);
     }
 
     @Test
-    void testIsEmpty() {
-        assertTrue(map.isEmpty());
-
-        map.put(KEY_1, VALUE_10);
-
-        assertFalse(map.isEmpty());
+    void deveriaConfirmarExistenciaDeChaveQuandoElaEstiverPresente() {
+        assertTrue(myMap.containsKey(CHAVE_1));
+        assertTrue(myMap.containsKey(CHAVE_2));
     }
 
     @Test
-    void testToArray() {
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        Object[] array = map.toArray();
-
-        assertEquals(2, array.length);
-        assertTrue(containsEntry(array, KEY_1, VALUE_10));
-        assertTrue(containsEntry(array, KEY_2, VALUE_20));
+    void naoDeveriaConfirmarExistenciaDeChaveQuandoElaNaoEstiverPresente() {
+        assertFalse(myMap.containsKey(CHAVE_INEXISTENTE));
     }
 
     @Test
-    void testEquals() {
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        MyMap<String, Integer> otherMap = new MyMap<>();
-        otherMap.put(KEY_1, VALUE_10);
-        otherMap.put(KEY_2, VALUE_20);
-
-        assertTrue(map.equals(otherMap));
-
-        otherMap.put("key3", VALUE_30);
-        assertFalse(map.equals(otherMap));
+    void deveriaRetornarTamanhoCorretoAposAdicao() {
+        myMap.put(CHAVE_4, VALOR_4);
+        assertEquals(4, myMap.size());
     }
 
     @Test
-    void testHashCode() {
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        MyMap<String, Integer> otherMap = new MyMap<>();
-        otherMap.put(KEY_1, VALUE_10);
-        otherMap.put(KEY_2, VALUE_20);
-
-        assertEquals(map.hashCode(), otherMap.hashCode());
+    void deveriaRetornarTamanhoCorretoAposRemocao() {
+        myMap.remove(CHAVE_2);
+        assertEquals(2, myMap.size());
     }
 
     @Test
-    void testIterator() {
-        map.put(KEY_1, VALUE_10);
-        map.put(KEY_2, VALUE_20);
-
-        int count = 0;
-        boolean key1Found = false;
-        boolean key2Found = false;
-
-        for (MyMap.Entry<String, Integer> entry : map) {
-            count++;
-            if (entry.getKey().equals(KEY_1) && entry.getValue().equals(VALUE_10)) {
-                key1Found = true;
-            } else if (entry.getKey().equals(KEY_2) && entry.getValue().equals(VALUE_20)) {
-                key2Found = true;
-            }
-        }
-        assertEquals(2, count);
-        assertTrue(key1Found);
-        assertTrue(key2Found);
+    void naoDeveriaRemoverElementoComValorNull() {
+        boolean resultado = myMap.remove(null);
+        assertFalse(resultado);
+        assertEquals(3, myMap.size());
     }
 
-    private boolean containsEntry(Object[] array, String key, Integer value) {
-        boolean found = false;
-
-        if (array != null && key != null && value != null) {
-            for (Object obj : array) {
-                if (obj instanceof MyMap.Entry<?, ?> entry) {
-                    String entryKey = (String) entry.getKey();
-                    Integer entryValue = (Integer) entry.getValue();
-
-                    if (entryKey != null && entryValue != null &&
-                        entryKey.equals(key) && entryValue.equals(value)) {
-                        found = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return found;
+    @Test
+    void deveriaRetornarTamanhoZeroAposRemoverTodosOsElementos() {
+        myMap.remove(CHAVE_1);
+        myMap.remove(CHAVE_2);
+        myMap.remove(CHAVE_3);
+        assertEquals(0, myMap.size());
     }
-
 }

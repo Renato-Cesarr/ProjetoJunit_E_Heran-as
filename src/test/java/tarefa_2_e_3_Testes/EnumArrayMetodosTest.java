@@ -1,9 +1,9 @@
 package tarefa_2_e_3_Testes;
 
-import tarefa2.model.Bicicleta;
-import tarefa2.model.Carro;
-import tarefa2.model.Model;
-import tarefa2.model.Pessoa;
+import tarefa_dois_model.Bicicleta;
+import tarefa_dois_model.Carro;
+import tarefa_dois_model.Model;
+import tarefa_dois_model.Pessoa;
 
 public enum EnumArrayMetodosTest {
     PESSOA_1(new Pessoa(1, "Pessoa 1", 1000.0, "Rua A", 25, "Rua A")),

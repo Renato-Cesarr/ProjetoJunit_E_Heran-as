@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import tarefa2.model.Model;
-import tarefa3.ArrayMetodos;
+import tarefa_dois_model.Model;
+import tarefa_tres.ArrayMetodos;
 
 class ArrayMetodosTest {
 
